@@ -444,36 +444,69 @@ document.addEventListener('DOMContentLoaded', () => {
         const quickViewButton = e.target.closest('.action-btn[data-action="quick-view"]');
         if (quickViewButton) {
             e.preventDefault();
-            const productId = quickViewButton.closest('.product-card').dataset.productId;
-            populateQuickView(productId);
-            return;
+            const productId = quickViewButton.closest('.product-card')?.dataset.productId;
+            if (productId) {
+                populateQuickView(productId);
+            }
         }
 
-        // Add to Cart
+        // Add to Cart from Grid
         const addToCartButton = e.target.closest('.add-to-cart');
-        if (addToCartButton) {
+        if (addToCartButton && !e.target.closest('.quickview-actions')) { // Ensure not QV button
             e.preventDefault();
             const productId = addToCartButton.dataset.productId;
-            // Basic add to cart logic (can be expanded with cart-handler.js)
-            console.log(`Add to cart: ${productId}`);
-            showNotification(`Sản phẩm đã được thêm vào giỏ hàng!`);
-            // Example: Update cart count (if main.js or another script handles this)
-            // updateCartCount(1); 
-            return;
+            const product = allProductsData.find(p => p.id === productId);
+            const quantity = 1; // Default quantity for grid add
+
+            if (product && product.stockStatus === 'Còn hàng') {
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                const existingItemIndex = cartItems.findIndex(item => item.productId == productId);
+
+                if (existingItemIndex > -1) {
+                    cartItems[existingItemIndex].quantity += quantity;
+                } else {
+                    cartItems.push({ productId: parseInt(productId), quantity: quantity });
+                }
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                
+                window.updateHeaderCartCount();
+                window.showNotification(`${product.name} (x${quantity}) đã được thêm vào giỏ hàng.`, 'success');
+                
+                // Optional: Add visual feedback to the button
+                addToCartButton.innerHTML = '<i class="fas fa-check"></i> Đã thêm';
+                addToCartButton.classList.add('added');
+                setTimeout(() => {
+                    addToCartButton.innerHTML = '<i class="fas fa-shopping-cart"></i> Thêm vào giỏ';
+                    addToCartButton.classList.remove('added');
+                }, 2000);
+
+            } else if (product) {
+                window.showNotification(`${product.name} hiện đã hết hàng.`, 'warning');
+            }
         }
         
-        // Buy Now
+        // Buy Now from Grid
         const buyNowButton = e.target.closest('.buy-now');
-        if (buyNowButton) {
+        if (buyNowButton && !e.target.closest('.quickview-actions')) { // Ensure not QV button
             e.preventDefault();
             const productId = buyNowButton.dataset.productId;
-            console.log(`Buy now: ${productId}`);
-            // Add to cart and redirect to checkout, or just redirect with product info
-            // This might involve adding the item to localStorage cart and then:
-            // window.location.href = 'cart.html?checkout=true'; 
-            // For now, just a notification
-            showNotification('Chức năng "Mua ngay" đang được phát triển.');
-            return;
+            const product = allProductsData.find(p => p.id === productId);
+            const quantity = 1;
+
+            if (product && product.stockStatus === 'Còn hàng') {
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                const existingItemIndex = cartItems.findIndex(item => item.productId == productId);
+                if (existingItemIndex > -1) {
+                    cartItems[existingItemIndex].quantity += quantity;
+                } else {
+                    cartItems.push({ productId: parseInt(productId), quantity: quantity });
+                }
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                window.updateHeaderCartCount();
+                window.location.href = 'cart.html';
+            } else if (product) {
+                 window.showNotification(`${product.name} hiện đã hết hàng.`, 'warning');
+            }
         }
 
         // Wishlist
@@ -534,22 +567,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- NOTIFICATIONS ---
-    function showNotification(message, type = 'success') { // type can be 'success', 'error', 'info'
-        if (!notificationElement || !notificationMessage) return;
-        notificationMessage.textContent = message;
-        notificationElement.className = 'notification show'; // Reset classes
-        notificationElement.classList.add(type); // Add type class for styling
-
-        // Auto-hide after some time
-        setTimeout(() => {
-            notificationElement.classList.remove('show');
-        }, 3000);
-    }
-    if (notificationClose) {
-        notificationClose.addEventListener('click', () => {
-            notificationElement.classList.remove('show');
-        });
-    }
+    // function showNotification(message, type = 'success') { // Removed: Using global from main.js
+    //     if (!notificationElement || !notificationMessage) return;
+    //     notificationMessage.textContent = message;
+    //     notificationElement.className = 'notification show'; 
+    //     notificationElement.classList.add(type);
+    //     // Auto-hide after some time
+    //     setTimeout(() => {
+    //         if (notificationElement) notificationElement.classList.remove('show');
+    //     }, 3000);
+    // }
+    // if (notificationClose) { // Listener for notification close is in main.js
+    //     notificationClose.addEventListener('click', () => {
+    //         if (notificationElement) notificationElement.classList.remove('show');
+    //     });
+    // }
 
     // --- LOADING OVERLAY ---
     function showLoading() {
@@ -1245,9 +1277,15 @@ class QuickViewModal {
     addToCart() {
         if (!this.currentProductId) return;
         
-        const product = productsData[this.currentProductId];
+        const product = productsData[this.currentProductId] || allProductsData.find(p => p.id == this.currentProductId); // Use productsData or allProductsData
         const quantityInput = document.getElementById('quickview-quantity-input');
         const quantity = parseInt(quantityInput?.value) || 1;
+
+        if (!product) {
+            console.error("QuickView: Product data not found for ID:", this.currentProductId);
+            window.showNotification('Lỗi: Không tìm thấy thông tin sản phẩm.', 'error');
+            return;
+        }
         
         // Get existing cart items
         let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -1271,7 +1309,7 @@ class QuickViewModal {
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
         
         // Update cart count in header
-        this.updateCartCount();
+        this.updateCartCount(); // This will call the global one
         
         // Show success message
         this.showAddToCartSuccess(product.name, quantity);
@@ -1283,17 +1321,10 @@ class QuickViewModal {
     }
     
     updateCartCount() {
-        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        window.updateHeaderCartCount(); // Call global function
         
-        const cartCountElements = document.querySelectorAll('.cart-count');
-        cartCountElements.forEach(el => {
-            el.textContent = totalItems;
-            el.style.display = totalItems > 0 ? 'flex' : 'none';
-        });
-        
-        // Dispatch custom event for other scripts
-        document.dispatchEvent(new CustomEvent('cartUpdated'));
+        // Dispatch custom event for other scripts if needed
+        // this.modal.dispatchEvent(new CustomEvent('cartUpdated'));
     }
     
     showAddToCartSuccess(productName, quantity) {
@@ -1313,7 +1344,7 @@ class QuickViewModal {
         
         // Show notification if notification system exists
         if (window.showNotification) {
-            window.showNotification(`Đã thêm ${quantity} x ${productName} vào giỏ hàng!`, 'success');
+            window.showNotification(`${productName} (x${quantity}) đã được thêm vào giỏ hàng.`, 'success');
         }
     }
     
@@ -1470,40 +1501,3 @@ function getProductName(card) {
     const nameEl = card.querySelector('.product-title a');
     return nameEl?.textContent.trim() || '';
 }
-
-// Notification system
-function showNotification(message, type = 'success') {
-    // Create notification element if it doesn't exist
-    let notification = document.getElementById('notification');
-    if (!notification) {
-        notification = document.createElement('div');
-        notification.id = 'notification';
-        notification.className = 'notification';
-        document.body.appendChild(notification);
-    }
-    
-    notification.innerHTML = `
-        <div class="notification-content">
-            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
-            <span>${message}</span>
-        </div>
-        <button class="notification-close">
-            <i class="fas fa-times"></i>
-        </button>
-    `;
-    
-    notification.className = `notification ${type} show`;
-    
-    // Close button
-    notification.querySelector('.notification-close')?.addEventListener('click', () => {
-        notification.classList.remove('show');
-    });
-    
-    // Auto close after 3 seconds
-    setTimeout(() => {
-        notification.classList.remove('show');
-    }, 3000);
-}
-
-// Make showNotification available globally
-window.showNotification = showNotification;

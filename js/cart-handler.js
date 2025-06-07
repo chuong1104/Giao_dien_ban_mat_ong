@@ -3,41 +3,94 @@ document.addEventListener('DOMContentLoaded', () => {
     const mockProducts = {
         1: {
             id: 1,
-            name: 'Mật ong rừng U Minh',
+            name: 'Mật ong rừng U Minh nguyên chất',
             price: 255000,
             oldPrice: 300000,
-            image: '/assets/images/matong9.jpg',
-            description: 'Dung tích: 500ml'
+            image: '/assets/images/matong4.jpg', // Assuming this is a generic image, adjust if needed
+            description: 'Hương vị đặc trưng, 500ml'
         },
         2: {
             id: 2,
-            name: 'Mật ong rừng Tràm',
+            name: 'Mật ong rừng Tràm Đồng Tháp',
             price: 280000,
-            image: '/assets/images/matong8.jpg',
-            description: 'Dung tích: 500ml'
+            image: '/assets/images/matong4.jpg',
+            description: 'Hương thơm dịu, 500ml'
         },
         3: {
             id: 3,
-            name: 'Mật ong rừng Bạc Hà',
+            name: 'Mật ong rừng Bạc Hà Mộc Châu',
             price: 270000,
             oldPrice: 300000,
-            image: '/assets/images/mậtong2.jpg',
-            description: 'Dung tích: 500ml'
+            image: '/assets/images/matong4.jpg',
+            description: 'Tốt cho hô hấp, 500ml'
         },
         4: {
             id: 4,
-            name: 'Mật ong rừng hoa Nhãn',
+            name: 'Mật ong rừng hoa Nhãn Hưng Yên',
             price: 310000,
-            image: '/assets/images/matong9.jpg',
-            description: 'Dung tích: 500ml'
+            image: '/assets/images/matong4.jpg',
+            description: 'Giàu khoáng chất, 500ml'
+        },
+        5: {
+            id: 5,
+            name: 'Mật ong rừng nguyên tổ Tây Bắc',
+            price: 340000,
+            oldPrice: 370000,
+            image: '/assets/images/matong4.jpg',
+            description: 'Nguyên tổ tinh túy, 300g'
+        },
+        6: {
+            id: 6,
+            name: 'Sữa ong chúa tươi nguyên chất',
+            price: 450000,
+            image: '/assets/images/matong4.jpg',
+            description: '"Thần dược" sức khỏe, 100g'
+        },
+        7: {
+            id: 7,
+            name: 'Mật ong hoa Cà Phê Đắk Lắk',
+            price: 290000,
+            image: '/assets/images/matong4.jpg',
+            description: 'Vị ngọt đậm đà, 500ml'
+        },
+        8: {
+            id: 8,
+            name: 'Mật ong hoa Vải Lục Ngạn',
+            price: 264000,
+            oldPrice: 300000,
+            image: '/assets/images/matong4.jpg',
+            description: 'Thơm dịu, tốt cho trẻ em, 500ml'
+        },
+        9: {
+            id: 9,
+            name: 'Mật ong Manuka New Zealand',
+            price: 450000, // Price might be higher in reality
+            image: '/assets/images/matong4.jpg',
+            description: 'Kháng khuẩn vượt trội, 250g'
+        },
+        10: {
+            id: 10,
+            name: 'Phấn hoa Ong Rừng Tự Nhiên',
+            price: 180000,
+            image: '/assets/images/matong4.jpg',
+            description: 'Giàu protein, vitamin, 200g'
+        },
+        11: {
+            id: 11,
+            name: 'Sáp ong Vàng Nguyên Chất',
+            price: 120000,
+            oldPrice: 150000,
+            image: '/assets/images/matong4.jpg',
+            description: 'Tinh khiết, đa dụng, 100g'
         }
     };
 
     // Mock data cho giỏ hàng - để demo
     const mockCartData = [
-        { productId: 1, quantity: 2 },
-        { productId: 3, quantity: 1 },
-        { productId: 4, quantity: 1 }
+        { productId: 1, quantity: 1 },
+        { productId: 3, quantity: 2 },
+        { productId: 5, quantity: 1 },
+        { productId: 10, quantity: 3 },
     ];
 
     // Khởi tạo giỏ hàng với mock data nếu localStorage trống
@@ -116,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         updateCartSummary();
-        updateHeaderCartCount();
+        window.updateHeaderCartCount(); // Use global function
     }
 
     // Cập nhật tổng giỏ hàng
@@ -137,19 +190,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Cập nhật số lượng cart trong header
-    function updateHeaderCartCount() {
-        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-        const cartCountElements = document.querySelectorAll('.cart-count');
-        cartCountElements.forEach(el => {
-            el.textContent = totalItems;
-            if (totalItems > 0) {
-                el.style.display = 'flex';
-            } else {
-                el.style.display = 'none';
-            }
-        });
-    }
+    // function updateHeaderCartCount() { // Removed: Now using global function from main.js
+    //     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    //     const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    //     const cartCountElements = document.querySelectorAll('.cart-count');
+    //     cartCountElements.forEach(el => {
+    //         el.textContent = totalItems;
+    //         if (totalItems > 0) {
+    //             el.style.display = 'flex';
+    //         } else {
+    //             el.style.display = 'none';
+    //         }
+    //     });
+    // }
 
     // Xử lý thay đổi số lượng
     function handleQuantityChange(productId, newQuantity) {
@@ -157,24 +210,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const itemIndex = cartItems.findIndex(item => item.productId == productId);
         
         if (itemIndex !== -1) {
+            const productName = mockProducts[productId] ? mockProducts[productId].name : 'Sản phẩm';
             if (newQuantity > 0) {
                 cartItems[itemIndex].quantity = parseInt(newQuantity);
             } else {
-                cartItems.splice(itemIndex, 1);
+                cartItems.splice(itemIndex, 1); // Should ideally be handled by remove, but good fallback
             }
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             renderCart();
-            showNotification('Đã cập nhật số lượng sản phẩm');
+            window.showNotification(`Đã cập nhật số lượng cho "${productName}".`, 'success'); // Use global function
         }
     }
 
     // Xử lý xóa sản phẩm
     function handleRemoveItem(productId) {
         let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const productName = mockProducts[productId] ? mockProducts[productId].name : 'Sản phẩm';
         cartItems = cartItems.filter(item => item.productId != productId);
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
         renderCart();
-        showNotification('Đã xóa sản phẩm khỏi giỏ hàng', 'success');
+        window.showNotification(`"${productName}" đã được xóa khỏi giỏ hàng.`, 'success'); // Use global function
     }
 
     // Event listeners
@@ -236,18 +291,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const validCoupons = {
             'HONEY10': { discount: 10, type: 'percent', description: 'Giảm 10%' },
             'SUMMER20': { discount: 20, type: 'percent', description: 'Giảm 20%' },
-            'FREESHIP': { discount: 30000, type: 'fixed', description: 'Miễn phí vận chuyển' }
+            'FREESHIP': { discount: 30000, type: 'fixed', description: 'Miễn phí vận chuyển (giảm 30k)' } // Clarified description
         };
         
         if (validCoupons[code]) {
             const coupon = validCoupons[code];
             couponStatus.innerHTML = `<span class="success">✓ Áp dụng thành công: ${coupon.description}</span>`;
-            showNotification(`Đã áp dụng mã giảm giá: ${coupon.description}`, 'success');
+            window.showNotification(`Đã áp dụng mã giảm giá: ${coupon.description}`, 'success'); // Use global function
             
             // Cập nhật tổng tiền (có thể implement logic tính toán ở đây)
         } else {
             couponStatus.innerHTML = `<span class="error">✗ Mã giảm giá không hợp lệ</span>`;
-            showNotification('Mã giảm giá không hợp lệ', 'error');
+            window.showNotification('Mã giảm giá không hợp lệ', 'error'); // Use global function
         }
     });
 
@@ -258,19 +313,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cartItems.length > 0) {
             window.location.href = 'payment.html';
         } else {
-            showNotification('Giỏ hàng của bạn đang trống', 'error');
+            window.showNotification('Giỏ hàng của bạn đang trống. Vui lòng thêm sản phẩm để tiếp tục.', 'warning'); // Use global function
         }
     });
-
-    // Notification function
-    function showNotification(message, type = 'success') {
-        // Sử dụng notification function từ main.js
-        if (window.showNotification) {
-            window.showNotification(message, type);
-        } else {
-            alert(message);
-        }
-    }
 
     // Khởi tạo trang
     renderCart();

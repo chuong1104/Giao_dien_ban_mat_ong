@@ -1,186 +1,9 @@
 // File: js/product-detail-handler.js
 // Xử lý hiển thị chi tiết sản phẩm
 
-/**
- * Dữ liệu sản phẩm (trong ứng dụng thực tế, dữ liệu này sẽ đến từ cơ sở dữ liệu)
- */
-const productData = {
-    '1': {
-        id: '1',
-        name: 'Mật ong rừng U Minh nguyên chất',
-        category: 'Mật ong rừng',
-        currentPrice: '255,000₫',
-        oldPrice: '300,000₫',
-        discount: true,
-        discountPercent: '15%',
-        rating: 5,
-        ratingCount: 24,
-        description: 'Mật ong rừng U Minh được thu hoạch từ rừng ngập mặn U Minh, mang hương vị đặc trưng của thiên nhiên hoang dã.',
-        origin: 'Cà Mau',
-        stock: 'in-stock',
-        stockText: 'Còn hàng',
-        image: '/assets/images/mậtong3.jpg',
-        detailDescription: 'Mật ong rừng U Minh nguyên chất được thu hoạch bởi các gia đình nuôi ong chuyên nghiệp tại khu vực rừng ngập mặn U Minh, tỉnh Cà Mau. Sản phẩm không chứa chất bảo quản, không pha tạp, giữ nguyên hương vị và dưỡng chất tự nhiên.',
-        specifications: [
-            { label: 'Dung tích', value: '500ml' },
-            { label: 'Xuất xứ', value: 'Cà Mau, Việt Nam' },
-            { label: 'Thành phần', value: '100% mật ong rừng nguyên chất' },
-            { label: 'Hạn sử dụng', value: '24 tháng kể từ ngày sản xuất' }
-        ],
-        gallery: [
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg'
-        ]
-    },
-    '2': {
-        id: '2',
-        name: 'Mật ong rừng Tràm Đồng Tháp',
-        category: 'Mật ong rừng',
-        currentPrice: '280,000₫',
-        oldPrice: '',
-        discount: false,
-        rating: 4,
-        ratingCount: 18,
-        description: 'Mật ong rừng Tràm Đồng Tháp có hương thơm đặc trưng, vị ngọt dịu, chứa nhiều dưỡng chất từ rừng tràm.',
-        origin: 'Đồng Tháp',
-        stock: 'in-stock',
-        stockText: 'Còn hàng',
-        image: '/assets/images/mậtong3.jpg',
-        detailDescription: 'Mật ong rừng Tràm Đồng Tháp được thu hoạch từ những cánh rừng tràm nguyên sinh tại Đồng Tháp. Sản phẩm có màu vàng amber đặc trưng, hương thơm nhẹ nhàng và vị ngọt thanh.',
-        specifications: [
-            { label: 'Dung tích', value: '500ml' },
-            { label: 'Xuất xứ', value: 'Đồng Tháp, Việt Nam' },
-            { label: 'Thành phần', value: '100% mật ong rừng tràm nguyên chất' },
-            { label: 'Hạn sử dụng', value: '24 tháng kể từ ngày sản xuất' }
-        ],
-        gallery: [
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg'
-        ]
-    },
-    '3': {
-        id: '3',
-        name: 'Mật ong rừng Bạc Hà Mộc Châu',
-        category: 'Mật ong rừng',
-        currentPrice: '270,000₫',
-        oldPrice: '300,000₫',
-        discount: true,
-        discountPercent: '10%',
-        rating: 5,
-        ratingCount: 31,
-        description: 'Mật ong rừng Bạc Hà Mộc Châu mang hương thơm của hoa bạc hà, giúp sảng khoái và tốt cho hệ hô hấp.',
-        origin: 'Sơn La',
-        stock: 'in-stock',
-        stockText: 'Còn hàng',
-        image: '/assets/images/mậtong3.jpg',
-        detailDescription: 'Mật ong rừng Bạc Hà Mộc Châu được thu hoạch từ vùng cao nguyên Mộc Châu, nơi có khí hậu mát mẻ quanh năm, rất thích hợp cho sự phát triển của cây bạc hà. Mật ong mang hương thơm nhẹ của bạc hà, có tác dụng tốt cho hệ hô hấp.',
-        specifications: [
-            { label: 'Dung tích', value: '500ml' },
-            { label: 'Xuất xứ', value: 'Sơn La, Việt Nam' },
-            { label: 'Thành phần', value: '100% mật ong rừng bạc hà nguyên chất' },
-            { label: 'Hạn sử dụng', value: '24 tháng kể từ ngày sản xuất' }
-        ],
-        gallery: [
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg'
-        ]
-    },
-    '4': {
-        id: '4',
-        name: 'Mật ong rừng hoa Nhãn Hưng Yên',
-        category: 'Mật ong rừng',
-        currentPrice: '310,000₫',
-        oldPrice: '',
-        discount: false,
-        rating: 4,
-        ratingCount: 15,
-        description: 'Mật ong rừng hoa Nhãn Hưng Yên có vị ngọt thanh, đặc biệt giàu khoáng chất và vitamin, hỗ trợ sức khỏe tim mạch.',
-        origin: 'Hưng Yên',
-        stock: 'in-stock',
-        stockText: 'Còn hàng',
-        image: '/placeholder.svg?height=600&width=600&text=Longan+Honey',
-        detailDescription: 'Mật ong rừng hoa Nhãn Hưng Yên được thu hoạch từ những vườn nhãn lâu năm tại Hưng Yên. Sản phẩm có màu vàng đậm, hương thơm đặc trưng của hoa nhãn và vị ngọt thanh. Đặc biệt giàu khoáng chất và vitamin, hỗ trợ sức khỏe tim mạch.',
-        specifications: [
-            { label: 'Dung tích', value: '500ml' },
-            { label: 'Xuất xứ', value: 'Hưng Yên, Việt Nam' },
-            { label: 'Thành phần', value: '100% mật ong hoa nhãn nguyên chất' },
-            { label: 'Hạn sử dụng', value: '24 tháng kể từ ngày sản xuất' }
-        ],
-        gallery: [
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg'
-        ]
-    },
-    '5': {
-        id: '5',
-        name: 'Mật ong rừng nguyên tổ cao cấp',
-        category: 'Mật ong nguyên tổ',
-        currentPrice: '340,000₫',
-        oldPrice: '370,000₫',
-        discount: true,
-        discountPercent: '8%',
-        rating: 5,
-        ratingCount: 42,
-        description: 'Mật ong rừng nguyên tổ cao cấp được thu hoạch nguyên sáp, giữ nguyên phấn hoa và mật ong tươi nguyên chất.',
-        origin: 'Tây Nguyên',
-        stock: 'in-stock',
-        stockText: 'Còn hàng',
-        image: '/placeholder.svg?height=600&width=600&text=Raw+Comb+Honey',
-        detailDescription: 'Mật ong rừng nguyên tổ cao cấp là sản phẩm được thu hoạch nguyên sáp, giữ nguyên phấn hoa và mật ong tươi nguyên chất. Sản phẩm này giữ được đầy đủ nhất các dưỡng chất từ thiên nhiên, bao gồm cả enzym, phấn hoa và các vi chất có lợi khác.',
-        specifications: [
-            { label: 'Khối lượng', value: '300g' },
-            { label: 'Xuất xứ', value: 'Tây Nguyên, Việt Nam' },
-            { label: 'Thành phần', value: '100% mật ong rừng nguyên tổ' },
-            { label: 'Hạn sử dụng', value: '12 tháng kể từ ngày sản xuất' }
-        ],
-        gallery: [
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg'
-        ]
-    },
-    '6': {
-        id: '6',
-        name: 'Sữa ong chúa tươi nguyên chất',
-        category: 'Sữa ong chúa',
-        currentPrice: '450,000₫',
-        oldPrice: '',
-        discount: false,
-        rating: 5,
-        ratingCount: 28,
-        description: 'Sữa ong chúa tươi nguyên chất được thu hoạch và bảo quản lạnh, giữ nguyên dưỡng chất quý giá cho sức khỏe và làm đẹp.',
-        origin: 'Đà Lạt',
-        stock: 'in-stock',
-        stockText: 'Còn hàng',
-        image: '/placeholder.svg?height=600&width=600&text=Fresh+Royal+Jelly',
-        detailDescription: 'Sữa ong chúa tươi nguyên chất được thu hoạch và bảo quản lạnh, giữ nguyên dưỡng chất quý giá. Sản phẩm giàu protein, axit amin, vitamin và khoáng chất, có tác dụng tăng cường sức khỏe, làm đẹp da và chống lão hóa.',
-        specifications: [
-            { label: 'Khối lượng', value: '100g' },
-            { label: 'Xuất xứ', value: 'Đà Lạt, Việt Nam' },
-            { label: 'Thành phần', value: '100% sữa ong chúa tươi nguyên chất' },
-            { label: 'Hạn sử dụng', value: '6 tháng kể từ ngày sản xuất (bảo quản lạnh)' }
-        ],
-        gallery: [
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg',
-            '/assets/images/mậtong3.jpg'
-        ]
-    }
-};
-
 document.addEventListener('DOMContentLoaded', function() {
     // Mock data sản phẩm chi tiết
-    const productData = {
+    const productDetailData = { // Renamed to avoid conflict if other productData exists
         1: {
             id: 1,
             name: 'Mật ong rừng U Minh',
@@ -353,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hiển thị thông tin sản phẩm
     function displayProductDetails() {
         const productId = getProductIdFromURL();
-        const product = productData[productId];
+        const product = productDetailData[productId]; // Use renamed data object
 
         if (!product) {
             console.error('Product not found');
@@ -508,6 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
         addToCartBtn.addEventListener('click', function() {
             const productId = parseInt(this.getAttribute('data-product-id'));
             const quantity = parseInt(quantityInput.value);
+            const product = productDetailData[productId]; // Get product details for name
             
             // Add to cart logic
             let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -522,10 +346,14 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             
             // Update cart count in header
-            updateHeaderCartCount();
+            window.updateHeaderCartCount(); // Use global function
             
             // Show notification
-            showNotification(`Đã thêm ${quantity} sản phẩm vào giỏ hàng`, 'success');
+            if (product) {
+                window.showNotification(`${product.name} (x${quantity}) đã được thêm vào giỏ hàng.`, 'success'); // Use global function
+            } else {
+                window.showNotification(`Đã thêm ${quantity} sản phẩm vào giỏ hàng`, 'success'); // Fallback
+            }
             
             // Animation effect
             this.innerHTML = '<i class="fas fa-check"></i> Đã thêm vào giỏ';
@@ -559,34 +387,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Update cart count
-    function updateHeaderCartCount() {
-        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-        const cartCountElements = document.querySelectorAll('.cart-count');
-        cartCountElements.forEach(el => {
-            el.textContent = totalItems;
-            if (totalItems > 0) {
-                el.style.display = 'flex';
-            }
-        });
-    }
-
-    // Show notification
-    function showNotification(message, type = 'success') {
-        if (window.showNotification) {
-            window.showNotification(message, type);
-        } else {
-            // Fallback notification
-            alert(message);
-        }
-    }
-
     // Initialize all functionality
     displayProductDetails();
     setupThumbnailClicks();
     setupQuantitySelector();
     setupTabs();
     setupAddToCart();
-    updateHeaderCartCount();
+    // updateHeaderCartCount(); // Called by main.js on DOMContentLoaded
 });

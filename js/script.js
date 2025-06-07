@@ -251,6 +251,134 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     createBackToTopButton();
+    
+    // Mock Product Data for index.html (Best Sellers)
+    // Ensure IDs match those in product-detail.html?id=X links
+    const indexProductData = {
+        1: { id: 1, name: 'Mật ong rừng U Minh', price: 255000 },
+        2: { id: 2, name: 'Mật ong rừng Tràm', price: 280000 },
+        3: { id: 3, name: 'Mật ong rừng Bạc Hà', price: 270000 },
+        4: { id: 4, name: 'Mật ong rừng hoa Nhãn', price: 310000 },
+        5: { id: 5, name: 'Mật ong rừng nguyên tổ', price: 340000 },
+        6: { id: 6, name: 'Mật ong rừng hoa Cà Phê', price: 290000 }, // Assuming ID 6 is Coffee Honey
+        7: { id: 7, name: 'Mật ong rừng hoa Vải', price: 264000 },    // Assuming ID 7 is Litchi Honey
+        8: { id: 8, name: 'Mật ong rừng Manuka', price: 450000 }     // Assuming ID 8 is Manuka Honey
+    };
+
+    // Slideshow functionality
+    const heroSlides = document.querySelectorAll('.hero-section .slide');
+    let currentHeroSlide = 0;
+    if (heroSlides.length > 0) {
+        heroSlides[0].classList.add('active'); // Ensure first slide is active initially
+        setInterval(() => {
+            heroSlides[currentHeroSlide].classList.remove('active');
+            currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+            heroSlides[currentHeroSlide].classList.add('active');
+        }, 5000); // Change slide every 5 seconds
+    }
+
+    // Product Slider (Best Sellers & News)
+    function initializeSlider(sliderContainerSelector, itemsSelector, prevBtnSelector, nextBtnSelector) {
+        const sliderContainer = document.querySelector(sliderContainerSelector);
+        if (!sliderContainer) return;
+
+        const slider = sliderContainer.querySelector(itemsSelector);
+        const prevBtn = sliderContainer.querySelector(prevBtnSelector);
+        const nextBtn = sliderContainer.querySelector(nextBtnSelector);
+        
+        if (!slider || !prevBtn || !nextBtn) return;
+
+        let scrollAmount = 0;
+        const itemWidth = slider.querySelector('.product-card, .news-card')?.offsetWidth + 20; // Include margin
+
+        prevBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: -itemWidth * 2, behavior: 'smooth' }); // Scroll by 2 items
+        });
+
+        nextBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: itemWidth * 2, behavior: 'smooth' }); // Scroll by 2 items
+        });
+    }
+
+    initializeSlider('.best-sellers-section .product-slider-container', '.products-slider .products-grid', '.prev-btn', '.next-btn');
+    initializeSlider('.news-section .news-slider-container', '.news-slider .news-grid', '.news-prev-btn', '.news-next-btn');
+    
+    // Back to top button
+    const backToTopButton = document.getElementById('back-to-top');
+    if (backToTopButton) {
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    if (mobileMenuToggle && navMenu) {
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+    }
+
+    // Add to Cart for Best Sellers
+    const addToCartButtons = document.querySelectorAll('.best-sellers-section .add-to-cart');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = this.dataset.productId;
+            const product = indexProductData[productId];
+            const quantity = 1; // Default quantity
+
+            if (product) {
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                const existingItemIndex = cartItems.findIndex(item => item.productId == productId);
+
+                if (existingItemIndex > -1) {
+                    cartItems[existingItemIndex].quantity += quantity;
+                } else {
+                    cartItems.push({ productId: parseInt(productId), quantity: quantity });
+                }
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                
+                if (window.updateHeaderCartCount) {
+                    window.updateHeaderCartCount();
+                }
+                if (window.showNotification) {
+                    window.showNotification(`${product.name} (x${quantity}) đã được thêm vào giỏ hàng.`, 'success');
+                } else {
+                    alert(`${product.name} đã được thêm vào giỏ hàng.`);
+                }
+
+                // Visual feedback
+                this.textContent = 'Đã thêm';
+                this.classList.add('added');
+                setTimeout(() => {
+                    this.textContent = 'Thêm vào giỏ';
+                    this.classList.remove('added');
+                }, 2000);
+
+            } else {
+                if(window.showNotification) {
+                    window.showNotification('Lỗi: Không tìm thấy sản phẩm.', 'error');
+                } else {
+                    alert('Lỗi: Không tìm thấy sản phẩm.');
+                }
+            }
+        });
+    });
+    
+    // Initial call to update cart count on page load (if main.js hasn't done it yet or for fallback)
+    if (window.updateHeaderCartCount) {
+        window.updateHeaderCartCount();
+    }
 });
 
 // Additional utility functions

@@ -134,12 +134,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to update cart count in header
     function updateHeaderCartCount() {
         const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        const totalItems = cartItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
         const cartCountElements = document.querySelectorAll('.cart-count');
         cartCountElements.forEach(el => {
             el.textContent = totalItems;
             if (totalItems > 0) {
-                el.style.display = 'flex';
+                el.style.display = 'flex'; // Or 'inline-block', 'block' based on CSS
             } else {
                 el.style.display = 'none';
             }
@@ -622,3 +622,76 @@ window.addEventListener('scroll', optimizedScrollHandler);
 function dispatchCartUpdateEvent() {
     document.dispatchEvent(new CustomEvent('cartUpdated'));
 }
+
+// Global function to update cart count in header
+function updateHeaderCartCount() {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const totalItems = cartItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
+    const cartCountElements = document.querySelectorAll('.cart-count');
+    cartCountElements.forEach(el => {
+        el.textContent = totalItems;
+        if (totalItems > 0) {
+            el.style.display = 'flex'; // Or 'inline-block', 'block' based on CSS
+        } else {
+            el.style.display = 'none';
+        }
+    });
+}
+
+// Global function to show notifications
+function showNotification(message, type = 'success', duration = 3000) {
+    const notificationElement = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notification-message');
+    const notificationIcon = notificationElement ? notificationElement.querySelector('.notification-content i') : null;
+
+    if (!notificationElement || !notificationMessage || !notificationIcon) {
+        console.warn('Notification elements (notification, notification-message, or icon) not found. Falling back to alert.');
+        alert(message);
+        return;
+    }
+
+    notificationMessage.textContent = message;
+    notificationElement.className = 'notification'; // Reset classes
+    notificationElement.classList.add('show', type); // type can be 'success', 'error', 'warning', 'info'
+
+    // Update icon based on type
+    if (type === 'success') {
+        notificationIcon.className = 'fas fa-check-circle';
+    } else if (type === 'error') {
+        notificationIcon.className = 'fas fa-times-circle';
+    } else if (type === 'warning') {
+        notificationIcon.className = 'fas fa-exclamation-triangle';
+    } else { // info or default
+        notificationIcon.className = 'fas fa-info-circle';
+    }
+    
+    // Auto-hide after specified duration
+    const currentTimeout = notificationElement.dataset.timeoutId;
+    if (currentTimeout) {
+        clearTimeout(currentTimeout);
+    }
+
+    const timeoutId = setTimeout(() => {
+        notificationElement.classList.remove('show');
+    }, duration);
+    notificationElement.dataset.timeoutId = timeoutId;
+}
+
+// Initial cart count update on page load for all pages
+// Also attach close listener for notification if it exists on the page
+document.addEventListener('DOMContentLoaded', () => {
+    updateHeaderCartCount();
+
+    const notificationElement = document.getElementById('notification');
+    const notificationCloseButton = document.getElementById('notification-close');
+    
+    if (notificationCloseButton && notificationElement) {
+        notificationCloseButton.addEventListener('click', () => {
+            notificationElement.classList.remove('show');
+            const timeoutId = notificationElement.dataset.timeoutId;
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+        });
+    }
+});
