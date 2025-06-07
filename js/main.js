@@ -94,16 +94,23 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             const productId = this.getAttribute('data-product-id');
-            const productName = this.closest('.product-card').querySelector('.product-title').textContent;
+            // Attempt to get product name robustly
+            let productName = "Sản phẩm"; // Default name
+            const productCard = this.closest('.product-card');
+            if (productCard) {
+                const titleElement = productCard.querySelector('.product-title a, .product-title'); // Check for link or direct title
+                if (titleElement) {
+                    productName = titleElement.textContent.trim();
+                }
+            }
             
             // Add to cart logic
-            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            let cartItems = getCartItemsFromLocalStorage(); // Use robust getter
             
-            // Check if product already exists in cart
-            const existingItem = cartItems.find(item => item.productId == productId);
+            const existingItem = cartItems.find(item => item.productId == productId); // Use == for potential string/number comparison if IDs are mixed
             
             if (existingItem) {
-                existingItem.quantity += 1;
+                existingItem.quantity = (existingItem.quantity || 0) + 1;
             } else {
                 cartItems.push({
                     productId: parseInt(productId),
@@ -113,21 +120,18 @@ document.addEventListener('DOMContentLoaded', function() {
             
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             
-            // Update cart count
             updateHeaderCartCount();
             
-            // Animation effect
             this.innerHTML = '<i class="fas fa-check"></i> Đã thêm';
             this.classList.add('added');
             
-            // Reset button after 2 seconds
             setTimeout(() => {
                 this.innerHTML = 'Thêm vào giỏ';
                 this.classList.remove('added');
             }, 2000);
             
-            // Show notification
-            showNotification(`Đã thêm ${productName} vào giỏ hàng`);
+            // Use the global notification function
+            window.showNotification(`Đã thêm ${productName} vào giỏ hàng`, 'success');
         });
     });
 
@@ -311,36 +315,20 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeMobileMenu();
     initializeHeaderScroll();
 
-    // General function to show notifications (can be called from page-specific JS)
-    // Ensure you have a #notification element in your base HTML or create it dynamically
-    window.showGlobalNotification = function(message, type = 'success', duration = 3000) {
-        let notification = document.getElementById('global-notification');
-        if (!notification) {
-            notification = document.createElement('div');
-            notification.id = 'global-notification';
-            notification.className = 'notification'; // Use general notification class
-            document.body.appendChild(notification);
-        }
-
-        notification.textContent = message;
-        notification.className = 'notification active ' + type; // Reset classes and add new ones
-
-        setTimeout(() => {
-            notification.classList.remove('active');
-        }, duration);
-    };
-    
     // Newsletter signup
     const newsletterForm = document.querySelector('.newsletter-form');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = this.querySelector('input').value;
-            if (validateEmail(email)) {
-                showNotification('Cảm ơn bạn đã đăng ký nhận tin!');
-                this.reset();
-            } else {
-                showNotification('Vui lòng nhập email hợp lệ!', 'error');
+            const emailInput = this.querySelector('input[type="email"], input[type="text"]'); // More robust selector
+            if (emailInput) {
+                const email = emailInput.value;
+                if (validateEmail(email)) {
+                    window.showNotification('Cảm ơn bạn đã đăng ký nhận tin!', 'success'); // Use global
+                    this.reset();
+                } else {
+                    window.showNotification('Vui lòng nhập email hợp lệ!', 'error'); // Use global
+                }
             }
         });
     }
@@ -523,10 +511,11 @@ document.head.insertAdjacentHTML('beforeend', `
 <style>
 .notification {
     position: fixed;
-    bottom: 20px; /* Changed from top to bottom */
+    bottom: 20px;
     right: 20px;
     padding: 15px 20px;
-    background: white;
+    background: white; /* Default background */
+    color: #333; /* Default text color */
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     display: flex;
@@ -534,65 +523,94 @@ document.head.insertAdjacentHTML('beforeend', `
     justify-content: space-between;
     z-index: 9999;
     opacity: 0;
-    transform: translateY(20px); /* Changed from -20px for slide-up effect */
-    transition: all 0.3s ease;
+    transform: translateY(20px); /* Start off-screen for slide-up effect */
+    transition: all 0.3s ease-in-out;
     max-width: 350px;
+    min-width: 300px; /* Ensure a minimum width */
 }
 
 .notification.show {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0); /* Slide into view */
 }
 
 .notification.success {
-    border-left: 4px solid #4CAF50;
+    background-color: #4CAF50; /* Green background for success */
+    color: white; /* White text for success */
+    border-left: none; /* Override any other border styles */
 }
 
 .notification.error {
-    border-left: 4px solid #F44336;
+    background-color: #F44336; /* Red background for error */
+    color: white; /* White text for error */
+    border-left: none;
+}
+
+.notification.warning {
+    background-color: #ff9800; /* Orange background for warning */
+    color: white; /* White text for warning */
+    border-left: none;
 }
 
 .notification-content {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-grow: 1;
 }
 
 .notification-content i {
     font-size: 1.2rem;
+    /* Default icon color will be inherited or can be set here */
 }
 
-.notification.success i {
-    color: #4CAF50;
-}
-
-.notification.error i {
-    color: #F44336;
+.notification.success .notification-content i,
+.notification.error .notification-content i,
+.notification.warning .notification-content i {
+    color: white; /* Ensure icons are white on colored backgrounds */
 }
 
 .notification-close {
     background: none;
     border: none;
-    color: #999;
+    color: #aaa; /* Default close button color */
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem; /* Slightly larger for easier clicking */
+    padding: 5px;
+    line-height: 1;
     margin-left: 10px;
-    padding: 0;
+}
+
+.notification.success .notification-close,
+.notification.error .notification-close,
+.notification.warning .notification-close {
+    color: white; /* White close button on colored backgrounds */
+    opacity: 0.7;
 }
 
 .notification-close:hover {
-    color: #333;
+    color: #333; /* Darker hover for default */
 }
 
-.btn.added {
-    background-color: #4CAF50;
+.notification.success .notification-close:hover,
+.notification.error .notification-close:hover,
+.notification.warning .notification-close:hover {
+    opacity: 1;
 }
 
 @media (max-width: 576px) {
     .notification {
-        left: 20px;
-        right: 20px;
-        max-width: calc(100% - 40px);
+        right: 10px;
+        bottom: 10px;
+        max-width: calc(100% - 20px); /* Adjust width for smaller screens */
+        min-width: auto;
+        padding: 12px 15px;
+    }
+    .notification-content i {
+        font-size: 1rem;
+    }
+    .notification-close {
+        font-size: 1rem;
     }
 }
 </style>
@@ -659,17 +677,4 @@ function getCartItemsFromLocalStorage() {
 // Also attach close listener for notification if it exists on the page
 document.addEventListener('DOMContentLoaded', () => {
     updateHeaderCartCount();
-
-    const notificationElement = document.getElementById('notification');
-    const notificationCloseButton = document.getElementById('notification-close');
-    
-    if (notificationCloseButton && notificationElement) {
-        notificationCloseButton.addEventListener('click', () => {
-            notificationElement.classList.remove('show');
-            const timeoutId = notificationElement.dataset.timeoutId;
-            if (timeoutId) {
-                clearTimeout(timeoutId);
-            }
-        });
-    }
 });

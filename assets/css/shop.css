@@ -1826,10 +1826,10 @@ body.dark-theme .action-btn:hover {
 /* Mobile Responsive for Notifications */
 @media (max-width: 576px) {
     .notification {
-        left: 10px;
-        right: 10px;
-        max-width: none;
-        min-width: auto;
+        left: auto; /* Ensures the notification aligns to the right */
+        right: 10px; /* Adjust right padding for smaller screens */
+        max-width: 90%; /* Limits width to 90% of the screen, respecting the general 400px cap */
+        min-width: 250px; /* Sets a reasonable minimum width for smaller screens */
     }
 }
 

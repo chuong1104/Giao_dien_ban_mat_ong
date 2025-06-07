@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const quickViewModal = document.getElementById('quickview-modal');
     const quickViewCloseBtn = document.getElementById('quickview-close-btn');
     const quickViewContainer = document.getElementById('quickview-product-container');
-    const notificationElement = document.getElementById('notification');
-    const notificationMessage = document.getElementById('notification-message');
-    const notificationClose = document.getElementById('notification-close');
+    // const notificationElement = document.getElementById('notification');
+    // const notificationMessage = document.getElementById('notification-message');
+    // const notificationClose = document.getElementById('notification-close');
     const loadingOverlay = document.getElementById('loading-overlay');
     const filterTagsContainer = document.getElementById('filter-tags-container');
     const recentlyViewedSection = document.getElementById('recently-viewed-section');
@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('cartItems', JSON.stringify(cartItems));
                 
                 window.updateHeaderCartCount();
-                window.showNotification(`${product.name} (x${quantity}) đã được thêm vào giỏ hàng.`, 'success');
+                // window.showNotification(`${product.name} (x${quantity}) đã được thêm vào giỏ hàng.`, 'success');
                 
                 // Optional: Add visual feedback to the button
                 addToCartButton.innerHTML = '<i class="fas fa-check"></i> Đã thêm';
@@ -566,7 +566,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- NOTIFICATIONS ---
+
     // function showNotification(message, type = 'success') { // Removed: Using global from main.js
     //     if (!notificationElement || !notificationMessage) return;
     //     notificationMessage.textContent = message;
@@ -1326,27 +1326,7 @@ class QuickViewModal {
         // Dispatch custom event for other scripts if needed
         // this.modal.dispatchEvent(new CustomEvent('cartUpdated'));
     }
-    
-    showAddToCartSuccess(productName, quantity) {
-        const addToCartBtn = document.getElementById('quickview-add-to-cart');
-        if (addToCartBtn) {
-            const originalText = addToCartBtn.innerHTML;
-            addToCartBtn.innerHTML = '<i class="fas fa-check"></i> Đã thêm!';
-            addToCartBtn.style.background = '#4CAF50';
-            addToCartBtn.disabled = true;
-            
-            setTimeout(() => {
-                addToCartBtn.innerHTML = originalText;
-                addToCartBtn.style.background = '';
-                addToCartBtn.disabled = false;
-            }, 1500);
-        }
-        
-        // Show notification if notification system exists
-        if (window.showNotification) {
-            window.showNotification(`${productName} (x${quantity}) đã được thêm vào giỏ hàng.`, 'success');
-        }
-    }
+
     
     formatPrice(price) {
         return new Intl.NumberFormat('vi-VN', {
