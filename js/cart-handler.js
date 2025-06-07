@@ -93,16 +93,34 @@ document.addEventListener('DOMContentLoaded', () => {
         { productId: 10, quantity: 3 },
     ];
 
-    // Khởi tạo giỏ hàng với mock data nếu localStorage trống
+    // Helper function (can be shared from main.js if main.js is guaranteed to load first and define it globally,
+    // or defined locally like this for encapsulation)
+    function getCartItemsFromLocalStorageForCartHandler() {
+        let items = [];
+        try {
+            const storedItems = localStorage.getItem('cartItems');
+            if (storedItems) {
+                const parsed = JSON.parse(storedItems);
+                if (Array.isArray(parsed)) {
+                    items = parsed;
+                } else {
+                    console.warn('cart-handler: cartItems in localStorage was not an array. Value:', parsed);
+                }
+            }
+        } catch (e) {
+            console.error('cart-handler: Error parsing cartItems from localStorage:', e);
+        }
+        return items;
+    }
+
     function initializeCart() {
-        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        let cartItems = getCartItemsFromLocalStorageForCartHandler();
         
-        // Nếu giỏ hàng trống, thêm mock data
-        if (cartItems.length === 0) {
-            cartItems = mockCartData;
+        if (cartItems.length === 0 && mockCartData && mockCartData.length > 0) {
+            // Deep copy mockData to avoid modifying the original
+            cartItems = JSON.parse(JSON.stringify(mockCartData));
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
         }
-        
         return cartItems;
     }
 
@@ -117,22 +135,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function renderCart() {
-        const cartItems = initializeCart();
-        const cartTableBody = document.getElementById('cart-items-body');
+        const cartItemsBody = document.getElementById('cart-items-body');
         const cartEmptyMessage = document.getElementById('cart-empty-message');
         
+        if (!cartItemsBody || !cartEmptyMessage) {
+            console.error('Cart DOM elements not found.');
+            return;
+        }
+        
+        let cartItems = initializeCart(); // initializeCart now returns a guaranteed array
+
+        const cartTableContainer = document.querySelector('.cart-table-container');
+
         if (cartItems.length === 0) {
-            cartTableBody.innerHTML = '';
+            cartItemsBody.innerHTML = '';
             cartEmptyMessage.style.display = 'block';
-            document.querySelector('.cart-table-container').style.display = 'none';
-            document.querySelector('.cart-summary-area').style.display = 'none';
+            if (cartTableContainer) {
+                cartTableContainer.style.display = 'none';
+            }
         } else {
             cartEmptyMessage.style.display = 'none';
-            document.querySelector('.cart-table-container').style.display = 'block';
-            document.querySelector('.cart-summary-area').style.display = 'block';
-            
-            cartTableBody.innerHTML = cartItems.map(item => {
+            if (cartTableContainer) {
+                cartTableContainer.style.display = 'table'; // Or 'block'
+            }
+            cartItemsBody.innerHTML = cartItems.map(item => {
                 const product = mockProducts[item.productId];
+                if (!product) {
+                    console.warn(`Product with ID ${item.productId} not found in mockProducts.`);
+                    return ''; // Skip rendering this item
+                }
                 const subtotal = product.price * item.quantity;
                 
                 return `
@@ -144,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </td>
                         <td class="product-name">
                             <a href="product-detail.html?id=${product.id}">${product.name}</a>
-                            <p class="item-meta">${product.description}</p>
+                            <p class="item-meta">${product.description || ''}</p>
                         </td>
                         <td class="product-price" data-price="${product.price}">
                             ${formatCurrency(product.price)}
@@ -169,24 +200,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         updateCartSummary();
-        window.updateHeaderCartCount(); // Use global function
+        if (window.updateHeaderCartCount) { // Ensure main.js's function is available
+            window.updateHeaderCartCount();
+        }
     }
 
     // Cập nhật tổng giỏ hàng
     function updateCartSummary() {
-        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const cartItems = getCartItemsFromLocalStorageForCartHandler(); // Use robust getter
         let subtotal = 0;
         
         cartItems.forEach(item => {
             const product = mockProducts[item.productId];
-            subtotal += product.price * item.quantity;
+            // Add checks for product and valid properties
+            if (product && typeof product.price === 'number' && item && typeof item.quantity === 'number') {
+                subtotal += product.price * item.quantity;
+            } else {
+                console.warn('Skipping item in cart summary due to missing data:', item);
+            }
         });
         
-        const shippingCost = 0; // Miễn phí
+        const shippingCost = 0; 
         const total = subtotal + shippingCost;
         
-        document.getElementById('cart-subtotal').textContent = formatCurrency(subtotal);
-        document.getElementById('cart-total').textContent = formatCurrency(total);
+        const cartSubtotalEl = document.getElementById('cart-subtotal');
+        const cartTotalEl = document.getElementById('cart-total');
+
+        if (cartSubtotalEl) cartSubtotalEl.textContent = formatCurrency(subtotal);
+        if (cartTotalEl) cartTotalEl.textContent = formatCurrency(total);
     }
 
     // Cập nhật số lượng cart trong header

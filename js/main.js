@@ -133,13 +133,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to update cart count in header
     function updateHeaderCartCount() {
-        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const totalItems = cartItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
+        const cartItems = getCartItemsFromLocalStorage(); // Use the robust helper function
+        const totalItems = cartItems.reduce((sum, item) => {
+            // Ensure item and item.quantity are valid before adding
+            if (item && typeof item.quantity === 'number') {
+                return sum + item.quantity;
+            }
+            return sum;
+        }, 0);
         const cartCountElements = document.querySelectorAll('.cart-count');
         cartCountElements.forEach(el => {
             el.textContent = totalItems;
             if (totalItems > 0) {
-                el.style.display = 'flex'; // Or 'inline-block', 'block' based on CSS
+                el.style.display = 'flex'; // Or 'block' or as appropriate
             } else {
                 el.style.display = 'none';
             }
@@ -208,24 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
-
-    // Function to update cart count in header
-    function updateHeaderCartCount() {
-        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-        const cartCountElements = document.querySelectorAll('.cart-count');
-        cartCountElements.forEach(el => {
-            el.textContent = totalItems;
-        });
-    }
-
-    // Initial cart count update
-    updateHeaderCartCount();
-
-    // Listen for custom event to update cart count from other scripts
-    document.addEventListener('cartUpdated', () => {
-        updateHeaderCartCount();
-    });
 
     // Enhanced mobile menu functionality for all pages
     function initializeMobileMenu() {
@@ -535,7 +523,7 @@ document.head.insertAdjacentHTML('beforeend', `
 <style>
 .notification {
     position: fixed;
-    top: 20px;
+    bottom: 20px; /* Changed from top to bottom */
     right: 20px;
     padding: 15px 20px;
     background: white;
@@ -546,7 +534,7 @@ document.head.insertAdjacentHTML('beforeend', `
     justify-content: space-between;
     z-index: 9999;
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(20px); /* Changed from -20px for slide-up effect */
     transition: all 0.3s ease;
     max-width: 350px;
 }
@@ -625,56 +613,46 @@ function dispatchCartUpdateEvent() {
 
 // Global function to update cart count in header
 function updateHeaderCartCount() {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    const totalItems = cartItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
+    const cartItems = getCartItemsFromLocalStorage(); // Use the robust helper function
+    const totalItems = cartItems.reduce((sum, item) => {
+        // Ensure item and item.quantity are valid before adding
+        if (item && typeof item.quantity === 'number') {
+            return sum + item.quantity;
+        }
+        return sum;
+    }, 0);
     const cartCountElements = document.querySelectorAll('.cart-count');
     cartCountElements.forEach(el => {
         el.textContent = totalItems;
         if (totalItems > 0) {
-            el.style.display = 'flex'; // Or 'inline-block', 'block' based on CSS
+            el.style.display = 'flex'; // Or 'block' or as appropriate
         } else {
             el.style.display = 'none';
         }
     });
 }
 
-// Global function to show notifications
-function showNotification(message, type = 'success', duration = 3000) {
-    const notificationElement = document.getElementById('notification');
-    const notificationMessage = document.getElementById('notification-message');
-    const notificationIcon = notificationElement ? notificationElement.querySelector('.notification-content i') : null;
-
-    if (!notificationElement || !notificationMessage || !notificationIcon) {
-        console.warn('Notification elements (notification, notification-message, or icon) not found. Falling back to alert.');
-        alert(message);
-        return;
+// Helper function to safely get cart items from localStorage
+function getCartItemsFromLocalStorage() {
+    let items = [];
+    try {
+        const storedItems = localStorage.getItem('cartItems');
+        if (storedItems) {
+            const parsed = JSON.parse(storedItems);
+            if (Array.isArray(parsed)) {
+                items = parsed;
+            } else {
+                // Log a warning if the parsed data is not an array
+                console.warn('cartItems in localStorage was not an array after parsing. Resetting to empty. Value was:', parsed);
+                // Optionally, clear the invalid item: localStorage.removeItem('cartItems');
+            }
+        }
+    } catch (e) {
+        // Log an error if JSON parsing fails
+        console.error('Error parsing cartItems from localStorage. Resetting to empty. Error:', e);
+        // Optionally, clear the invalid item: localStorage.removeItem('cartItems');
     }
-
-    notificationMessage.textContent = message;
-    notificationElement.className = 'notification'; // Reset classes
-    notificationElement.classList.add('show', type); // type can be 'success', 'error', 'warning', 'info'
-
-    // Update icon based on type
-    if (type === 'success') {
-        notificationIcon.className = 'fas fa-check-circle';
-    } else if (type === 'error') {
-        notificationIcon.className = 'fas fa-times-circle';
-    } else if (type === 'warning') {
-        notificationIcon.className = 'fas fa-exclamation-triangle';
-    } else { // info or default
-        notificationIcon.className = 'fas fa-info-circle';
-    }
-    
-    // Auto-hide after specified duration
-    const currentTimeout = notificationElement.dataset.timeoutId;
-    if (currentTimeout) {
-        clearTimeout(currentTimeout);
-    }
-
-    const timeoutId = setTimeout(() => {
-        notificationElement.classList.remove('show');
-    }, duration);
-    notificationElement.dataset.timeoutId = timeoutId;
+    return items;
 }
 
 // Initial cart count update on page load for all pages
