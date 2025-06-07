@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honey Bee Farm - Mật Ong Nguyên Chất Rừng Nhiệt Đới</title>    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/sliders.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="main-nav">
+                <div class="mobile-menu-toggle">
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link active">Trang chủ</a></li>
+                    <li class="nav-item"><a href="shop.html" class="nav-link">Sản phẩm</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">Tin tức</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Liên hệ</a></li>
+                </ul>
+                
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="/assets/images/logo.jpg" alt="Honey Bee Farm Logo">
+                    </a>
+                </div>
+
+                <div class="right-nav">
+                    <a href="tel:18006750" class="hotline">
+                        <i class="fas fa-phone-alt"></i>
+                        <span class="phone">1800 6750</span>
+                    </a>
+                    <a href="#" class="user-account">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="#" class="search">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    <a href="cart.html" class="cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Slideshow - Compact Minimal Version -->
+    <section class="hero-section">
+        <div class="slideshow-container">
+            <div class="slide active">
+                <img src="assets/images/matongbanner.jpg" alt="Honey Background 1" 
+                     loading="eager"
+                     style="object-fit: cover; object-position: center 40%;"
+                     onerror="console.error('Image failed to load:', this.src); this.style.display='none'; this.closest('.slide').style.background='linear-gradient(135deg, #f39c12, #e67e22)';">
+            </div>
+            <div class="slide">
+                <img src="assets/images/matong10.jpg" alt="Honey Background 2"
+                     loading="lazy"
+                     style="object-fit: cover; object-position: center 40%;"
+                     onerror="console.error('Image failed to load:', this.src); this.style.display='none'; this.closest('.slide').style.background='linear-gradient(135deg, #f39c12, #e67e22)';">
+            </div>
+            <div class="slide">
+                <img src="assets/images/matong4.jpg" alt="Honey Background 3"
+                     loading="lazy"
+                     style="object-fit: cover; object-position: center 40%;"
+                     onerror="console.error('Image failed to load:', this.src); this.style.display='none'; this.closest('.slide').style.background='linear-gradient(135deg, #f39c12, #e67e22)';">
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Mật ong nguyên chất<br>Rừng Nhiệt Đới</h1>
+                <p class="hero-desc">100% nguyên chất không pha tạp, thu hoạch từ những cánh rừng nguyên sinh</p>
+                <a href="shop.html" class="btn btn-primary">
+                    <i class="fas fa-shopping-cart"></i> Mua ngay
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Categories Section - Compact Version -->
+    <section class="category-section">
+        <div class="container">
+            <h2 class="section-title">DANH MỤC SẢN PHẨM</h2>
+            <div class="category-grid">
+                <a href="shop.html?category=mat-ong-rung" class="category-card">
+                    <div class="category-image">
+                        <img src="assets/images/matong7.jpg" alt="Mật Ong Rừng" loading="lazy">
+                    </div>
+                    <h3 class="category-name">Mật Ong Rừng</h3>
+                </a>
+                <a href="shop.html?category=mat-ong-hoa" class="category-card">
+                    <div class="category-image">
+                        <img src="assets/images/matong8.jpg" alt="Mật Ong Hoa" loading="lazy">
+                    </div>
+                    <h3 class="category-name">Mật Ong Hoa</h3>
+                </a>
+                <a href="shop.html?category=sua-ong-chua" class="category-card">
+                    <div class="category-image">
+                        <img src="assets/images/matong9.jpg" alt="Sữa Ong Chúa" loading="lazy">
+                    </div>
+                    <h3 class="category-name">Sữa Ong Chúa</h3>
+                </a>
+                <a href="shop.html?category=san-pham-khac" class="category-card">
+                    <div class="category-image">
+                        <img src="assets/images/tintuc5.jpg" alt="Sản Phẩm Khác" loading="lazy">
+                    </div>
+                    <h3 class="category-name">Sản Phẩm Khác</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Sellers Section -->
+    <section class="best-sellers-section">
+        <div class="container">
+            <h2 class="section-title">MẬT ONG BÁN CHẠY NHẤT</h2>
+            
+            <div class="product-slider-container">
+                <button class="slider-nav prev-btn"><i class="fas fa-chevron-left"></i></button>
+                
+                <div class="products-slider">
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-img">
+                                <a href="product-detail.html?id=1">
+                                    <img src="assets/images/matong9.jpg" alt="Mật ong rừng U Minh">
+                                </a>
+                                <span class="discount-badge">-15%</span>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html?id=1">Mật ong rừng U Minh</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="current-price">255,000₫</span>
+                                    <span class="old-price">300,000₫</span>
+                                </div>
+                                <button class="btn btn-sm add-to-cart" data-product-id="1">Thêm vào giỏ</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card">
+                            <div class="product-img">
+                                <a href="product-detail.html?id=2">
+                                    <img src="assets/images/matong8.jpg" alt="Mật ong rừng Tràm">
+                                </a>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html?id=2">Mật ong rừng Tràm</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="current-price">280,000₫</span>
+                                </div>
+                                <button class="btn btn-sm add-to-cart" data-product-id="2">Thêm vào giỏ</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card">
+                            <div class="product-img">
+                                <a href="product-detail.html?id=3">
+                                    <img src="assets/images/mậtong2.jpg" alt="Mật ong rừng Bạc Hà">
+                                </a>
+                                <span class="discount-badge">-10%</span>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html?id=3">Mật ong rừng Bạc Hà</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="current-price">270,000₫</span>
+                                    <span class="old-price">300,000₫</span>
+                                </div>
+                                <button class="btn btn-sm add-to-cart" data-product-id="3">Thêm vào giỏ</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card">
+                            <div class="product-img">
+                                <a href="product-detail.html?id=4">
+                                    <img src="assets/images/matong9.jpg" alt="Mật ong rừng hoa Nhãn">
+                                </a>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html?id=4">Mật ong rừng hoa Nhãn</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="current-price">310,000₫</span>
+                                </div>
+                                <button class="btn btn-sm add-to-cart" data-product-id="4">Thêm vào giỏ</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card">
+                            <div class="product-img">
+                                <a href="product-detail.html?id=5">
+                                    <img src="assets/images/matong9.jpg" alt="Mật ong rừng nguyên tổ">
+                                </a>
+                                <span class="discount-badge">-8%</span>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html?id=5">Mật ong rừng nguyên tổ</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="current-price">340,000₫</span>
+                                    <span class="old-price">370,000₫</span>
+                                </div>
+                                <button class="btn btn-sm add-to-cart" data-product-id="5">Thêm vào giỏ</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card">
+                            <div class="product-img">
+                                <a href="product-detail.html?id=6">
+                                    <img src="assets/images/matong9.jpg" alt="Mật ong rừng hoa Cà Phê">
+                                </a>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html?id=6">Mật ong rừng hoa Cà Phê</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="current-price">290,000₫</span>
+                                </div>
+                                <button class="btn btn-sm add-to-cart" data-product-id="6">Thêm vào giỏ</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-img">
+                                <a href="product-detail.html?id=7">
+                                    <img src="assets/images/matong7.jpg" alt="Mật ong rừng hoa Vải">
+                                </a>
+                                <span class="discount-badge">-12%</span>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html?id=7">Mật ong rừng hoa Vải</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="current-price">264,000₫</span>
+                                    <span class="old-price">300,000₫</span>
+                                </div>
+                                <button class="btn btn-sm add-to-cart" data-product-id="7">Thêm vào giỏ</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-img">
+                                <a href="product-detail.html?id=8">
+                                    <img src="assets/images/matong6.jpg" alt="Mật ong rừng Manuka">
+                                </a>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html?id=8">Mật ong rừng Manuka</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="current-price">450,000₫</span>
+                                </div>
+                                <button class="btn btn-sm add-to-cart" data-product-id="8">Thêm vào giỏ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="slider-nav next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+            <div class="view-more-container">
+                <a href="shop.html" class="view-more-link">Xem thêm sản phẩm <i class="fas fa-chevron-down"></i></a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Production Process Section -->
+    <section class="production-section">
+        <div class="honey-drip-top"></div>
+        <div class="container">
+            <h2 class="section-title">QUY TRÌNH SẢN XUẤT MẬT ONG</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <div class="step-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="step-title">Thu hoạch mật ong</h3>
+                    <div class="step-details">
+                        <p>Quy trình thu hoạch mật ong được thực hiện vào thời điểm <strong>hoa nở nhiều nhất</strong> trong năm. Đảm bảo chất lượng tốt nhất.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <div class="step-icon">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3 class="step-title">Lọc và xử lý</h3>
+                    <div class="step-details">
+                        <p>Mật ong thu hoạch được <strong>lọc và xử lý kỹ càng</strong> để loại bỏ tạp chất, đảm bảo an toàn vệ sinh.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <div class="step-icon">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3 class="step-title">Kiểm tra chất lượng</h3>
+                    <div class="step-details">
+                        <p>Mỗi lô mật ong đều được <strong>kiểm tra nghiêm ngặt</strong> theo tiêu chuẩn an toàn thực phẩm quốc tế.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <div class="step-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h3 class="step-title">Đóng gói và phân phối</h3>
+                    <div class="step-details">
+                        <p>Mật ong được <strong>đóng gói trong điều kiện vô trùng</strong> và nhanh chóng phân phối đến tay người tiêu dùng.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="floating-bee">
+                <img src="/placeholder.svg?height=60&width=60" alt="Bee Icon">
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Commitments Section -->
+    <section class="commitments-section">
+        <div class="container">
+            <h2 class="section-title">CAM KẾT CỦA CHÚNG TÔI</h2>
+            <div class="commitments-grid">
+                <div class="commitment-item">
+                    <div class="commitment-icon"><i class="fas fa-leaf"></i></div>
+                    <h3 class="commitment-title">100% Tự Nhiên</h3>
+                    <p class="commitment-description">Sản phẩm mật ong nguyên chất, không pha tạp, giữ trọn hương vị thiên nhiên.</p>
+                </div>
+                <div class="commitment-item">
+                    <div class="commitment-icon"><i class="fas fa-check-circle"></i></div>
+                    <h3 class="commitment-title">Chất Lượng Đảm Bảo</h3>
+                    <p class="commitment-description">Quy trình kiểm định nghiêm ngặt, đảm bảo an toàn và chất lượng tốt nhất.</p>
+                </div>
+                <div class="commitment-item">
+                    <div class="commitment-icon"><i class="fas fa-shipping-fast"></i></div>
+                    <h3 class="commitment-title">Giao Hàng Nhanh</h3>
+                    <p class="commitment-description">Dịch vụ giao hàng nhanh chóng, tiện lợi trên toàn quốc.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section">
+        <div class="container">
+            <h2 class="section-title">TIN TỨC</h2>
+            <div class="news-slider-container">
+                <button class="slider-nav news-prev-btn"><i class="fas fa-chevron-left"></i></button>
+                
+                <div class="news-slider">
+                    <div class="news-grid">
+                        <article class="news-card">
+                            <div class="news-img">
+                                <img src="/assets/images/tintuc5.jpg" alt="Những ai thì nên dùng mật ong">
+                            </div>
+                            <div class="news-content">
+                                <div class="news-date">Thứ Ba, 29/11/2022</div>
+                                <h3 class="news-title">Những ai thì nên dùng mật ong thường xuyên?</h3>
+                                <p class="news-excerpt">Những ai nên dùng mật ong? Mật ong là thực phẩm chứa nhiều công dụng tốt cho làn da, đường tiêu hóa. Nó có thể được xem...</p>
+                                <a href="blog.html" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        
+                        <article class="news-card">
+                            <div class="news-img">
+                                <img src="/assets/images/tintuc1.jpg" alt="Lợi ích của mật ong với sức khỏe">
+                            </div>
+                            <div class="news-content">
+                                <div class="news-date">Thứ Hai, 21/11/2022</div>
+                                <h3 class="news-title">10 lợi ích tuyệt vời của mật ong với sức khỏe</h3>
+                                <p class="news-excerpt">Mật ong không chỉ là chất làm ngọt tự nhiên mà còn có nhiều lợi ích sức khỏe. Từ việc tăng cường miễn dịch đến hỗ trợ...</p>
+                                <a href="blog.html" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        
+                        <article class="news-card">
+                            <div class="news-img">
+                                <img src="/assets/images/tintuc2.jpg" alt="Cách bảo quản mật ong">
+                            </div>
+                            <div class="news-content">
+                                <div class="news-date">Thứ Năm, 10/11/2022</div>
+                                <h3 class="news-title">Cách bảo quản mật ong để giữ nguyên dưỡng chất</h3>
+                                <p class="news-excerpt">Bạn đã biết cách bảo quản mật ong đúng cách chưa? Nhiều người không biết rằng bảo quản không đúng có thể làm giảm đáng kể...</p>
+                                <a href="blog.html" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        
+                        <article class="news-card">
+                            <div class="news-img">
+                                <img src="/assets/images/tintuc3.jpg" alt="Cách phân biệt mật ong thật giả">
+                            </div>
+                            <div class="news-content">
+                                <div class="news-date">Thứ Tư, 02/11/2022</div>
+                                <h3 class="news-title">5 cách đơn giản để phân biệt mật ong thật và giả</h3>
+                                <p class="news-excerpt">Thị trường mật ong hiện nay có rất nhiều sản phẩm kém chất lượng, vậy làm sao để phân biệt được mật ong thật và giả...</p>
+                                <a href="blog.html" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                
+                <button class="slider-nav news-next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/assets/images/logo.jpg" alt="Honey Bee Farm Logo">
+                    </div>
+                    <div class="company-info">
+                        <p>Tầng 6 tòa nhà Ladeco, 266 Đội Cấn, phường Liễu Giai, Hà Nội.</p>
+                        <p class="hotline-footer">1800 6750</p>
+                        <p>hellocalein@gmail.com</p>
+                        <p>Hệ thống chi nhánh</p>
+                    </div>
+                    <div class="social-media">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>THÔNG TIN KHÁCH HÀNG</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Tài khoản của tôi</a></li>
+                        <li><a href="#">Đơn hàng</a></li>
+                        <li><a href="#">Sổ địa chỉ</a></li>
+                        <li><a href="#">Chi tiết tài khoản</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>HỖ TRỢ KHÁCH HÀNG</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Điều khoản dịch vụ</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>ĐĂNG KÝ NHẬN TIN</h4>
+                    <p>Nhận thông tin sản phẩm mới nhất, tin khuyến mãi và nhiều hơn nữa.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Email của bạn" required>
+                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                    </form>
+                    <div class="payment-methods">
+                        <img src="/assets/images/visa.jpg" alt="Phương thức thanh toán">
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Honey Bee Farm. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

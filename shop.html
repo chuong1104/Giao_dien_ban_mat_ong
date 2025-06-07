@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản Phẩm - Honey Bee Farm</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/sliders.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="description" content="Khám phá bộ sưu tập mật ong nguyên chất từ Honey Bee Farm - Chất lượng cao, nguồn gốc rõ ràng">
+    <meta name="keywords" content="mật ong, mật ong rừng, sữa ong chúa, phấn hoa, sáp ong">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="main-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Trang chủ</a></li>
+                    <li class="nav-item"><a href="shop.html" class="nav-link active">Sản phẩm</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">Tin tức</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Liên hệ</a></li>
+                </ul>
+                
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="/assets/images/logo.jpg" alt="Honey Bee Farm Logo">
+                    </a>
+                </div>
+
+                <div class="right-nav">
+                    <a href="tel:18006750" class="hotline">
+                        <i class="fas fa-phone-alt"></i>
+                        <span class="phone">1800 6750</span>
+                    </a>
+                    <a href="#" class="user-account" aria-label="Tài khoản">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="#" class="search" aria-label="Tìm kiếm">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    <a href="cart.html" class="cart" aria-label="Giỏ hàng">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Enhanced Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="banner-content">
+                <h1>Cửa Hàng Mật Ong</h1>
+                <p class="banner-subtitle">Khám phá bộ sưu tập mật ong nguyên chất từ thiên nhiên</p>
+                <div class="breadcrumb">
+                    <a href="index.html">Trang chủ</a>
+                    <span class="separator"><i class="fas fa-chevron-right"></i></span>
+                    <span class="current">Sản phẩm</span>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Shop Content -->
+    <section class="shop-section">
+        <div class="container">
+            <!-- Enhanced Shop Header -->
+            <div class="shop-header">
+                <div class="shop-controls">
+                    <div class="showing-results">
+                        <p><strong>24</strong> sản phẩm được tìm thấy</p>
+                    </div>
+                          <div class="shop-actions">
+                        <div class="view-toggle">
+                            <button class="view-btn active" data-view="grid" aria-label="Xem dạng lưới">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="view-btn" data-view="grid-large" aria-label="Xem dạng lưới lớn">
+                                <i class="fas fa-th-large"></i>
+                            </button>
+                            <button class="view-btn" data-view="list" aria-label="Xem dạng danh sách">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="theme-toggle">
+                            <button id="theme-toggle-btn" aria-label="Chuyển đổi giao diện sáng/tối">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="shop-sorting">
+                            <label for="sort-products" class="sort-label">Sắp xếp theo:</label>
+                            <select name="sort-products" id="sort-products" aria-label="Sắp xếp sản phẩm">
+                                <option value="default">Sắp xếp mặc định</option>
+                                <option value="popularity">Phổ biến nhất</option>
+                                <option value="rating">Đánh giá cao nhất</option>
+                                <option value="date">Mới nhất</option>
+                                <option value="price-asc">Giá: thấp đến cao</option>
+                                <option value="price-desc">Giá: cao đến thấp</option>
+                                <option value="name-asc">Tên: A-Z</option>
+                                <option value="name-desc">Tên: Z-A</option>
+                            </select>
+                        </div>
+                        
+                        <button class="filter-toggle" id="filter-toggle">
+                            <i class="fas fa-filter"></i> Bộ lọc
+                        </button>
+                    </div>                </div>
+                
+                <!-- Filter Tags Container -->
+                <div class="filter-tags-container" id="filter-tags-container">
+                    <!-- Filter tags will be added via JavaScript -->
+                </div>
+            </div>
+
+            <div class="shop-container">
+                <!-- Enhanced Sidebar -->
+                <div class="shop-sidebar" id="shop-sidebar">
+                    <div class="sidebar-header">
+                        <h2><i class="fas fa-filter"></i> Bộ lọc sản phẩm</h2>
+                        <button class="close-sidebar" id="close-sidebar" aria-label="Đóng bộ lọc">&times;</button>
+                    </div>
+
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">
+                            <i class="fas fa-th-large"></i>
+                            Danh Mục Sản Phẩm
+                        </h3>
+                        <ul class="category-list">
+                            <li><a href="#" class="active" data-category="all">
+                                <span>Tất cả sản phẩm</span>
+                                <span class="count">24</span>
+                            </a></li>
+                            <li><a href="#" data-category="forest-honey">
+                                <span>Mật ong rừng</span>
+                                <span class="count">8</span>
+                            </a></li>
+                            <li><a href="#" data-category="raw-honey">
+                                <span>Mật ong nguyên tổ</span>
+                                <span class="count">3</span>
+                            </a></li>
+                            <li><a href="#" data-category="royal-jelly">
+                                <span>Sữa ong chúa</span>
+                                <span class="count">4</span>
+                            </a></li>
+                            <li><a href="#" data-category="bee-pollen">
+                                <span>Phấn hoa</span>
+                                <span class="count">3</span>
+                            </a></li>
+                            <li><a href="#" data-category="beeswax">
+                                <span>Sáp ong</span>
+                                <span class="count">2</span>
+                            </a></li>
+                            <li><a href="#" data-category="propolis">
+                                <span>Keo ong</span>
+                                <span class="count">4</span>
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Price Range Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">
+                            <i class="fas fa-dollar-sign"></i>
+                            Lọc Theo Giá
+                        </h3>
+                        <div class="price-filter">
+                            <div class="price-range-container">
+                                <div class="price-range-slider" id="price-range">
+                                    <!-- Price range will be handled by JavaScript -->
+                                </div>
+                                <div class="price-range-values">
+                                    <span class="min-val">0₫</span>
+                                    <span class="max-val">500,000₫</span>
+                                </div>
+                            </div>
+                            <div class="price-inputs">
+                                <div class="price-input-group">
+                                    <label for="min-price">Giá từ</label>
+                                    <input type="text" id="min-price" placeholder="0₫" aria-label="Giá tối thiểu">
+                                </div>
+                                <div class="price-input-group">
+                                    <label for="max-price">Giá đến</label>
+                                    <input type="text" id="max-price" placeholder="500,000₫" aria-label="Giá tối đa">
+                                </div>
+                            </div>
+                            <button class="btn filter-btn" id="apply-filter">
+                                <i class="fas fa-search"></i> Áp Dụng Lọc
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Rating Filter -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">
+                            <i class="fas fa-star"></i>
+                            Đánh Giá
+                        </h3>
+                        <ul class="category-list rating-filter">
+                            <li><a href="#" data-rating="5">
+                                <span class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span class="count">12</span>
+                            </a></li>
+                            <li><a href="#" data-rating="4">
+                                <span class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <span class="rating-text">& cao hơn</span>
+                                </span>
+                                <span class="count">18</span>
+                            </a></li>
+                            <li><a href="#" data-rating="3">
+                                <span class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <span class="rating-text">& cao hơn</span>
+                                </span>
+                                <span class="count">22</span>
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Brand Filter -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">
+                            <i class="fas fa-award"></i>
+                            Thương Hiệu
+                        </h3>
+                        <ul class="category-list brand-filter">
+                            <li><a href="#" data-brand="honey-bee-farm">
+                                <span>Honey Bee Farm</span>
+                                <span class="count">15</span>
+                            </a></li>
+                            <li><a href="#" data-brand="u-minh">
+                                <span>Mật Ong U Minh</span>
+                                <span class="count">4</span>
+                            </a></li>
+                            <li><a href="#" data-brand="tay-bac">
+                                <span>Mật Ong Tây Bắc</span>
+                                <span class="count">3</span>
+                            </a></li>
+                            <li><a href="#" data-brand="dong-thap">
+                                <span>Mật Ong Đồng Tháp</span>
+                                <span class="count">2</span>
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Promotional Banner -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">
+                            <i class="fas fa-gift"></i>
+                            Ưu Đãi Đặc Biệt
+                        </h3>
+                        <div class="promotional-banner">
+                            <img src="/assets/images/matong4.jpg" alt="Khuyến mãi">
+                            <div class="promo-content">
+                                <h4>Giảm 15% Tất Cả</h4>
+                                <p>Mã: <strong>HONEY15</strong></p>
+                                <button class="copy-code" data-code="HONEY15">
+                                    <i class="fas fa-copy"></i> Sao Chép
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clear All Filters -->
+                    <div class="sidebar-widget">
+                        <button class="btn filter-btn" id="clear-all-filters" style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%);">
+                            <i class="fas fa-refresh"></i> Xóa Tất Cả Bộ Lọc
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Enhanced Main Content -->
+                <div class="shop-main">                   
+                     <div class="products-grid" id="products-grid">
+                        <!-- Product 1 -->
+                        <div class="product-card" data-category="forest-honey" data-price="255000" data-rating="5" data-product-id="1">
+                            <div class="product-card-inner">
+                                <div class="product-img">
+                                    <a href="product-detail.html?id=1" class="product-link">
+                                        <img src="/assets/images/matong4.jpg" alt="Mật ong rừng U Minh">
+                                    </a>
+                                    <span class="discount-badge">-15%</span>
+                                    <div class="product-actions">
+                            
+                                        <button class="action-btn" aria-label="Yêu thích" data-action="wishlist" title="Thêm vào yêu thích">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="action-btn" aria-label="So sánh" data-action="compare" title="Thêm vào so sánh">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Mật ong rừng</div>
+                                    <h3 class="product-title">
+                                        <a href="product-detail.html?id=1">Mật ong rừng U Minh nguyên chất</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(24 đánh giá)</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">255,000₫</span>
+                                        <span class="old-price">300,000₫</span>
+                                    </div>
+                                    <div class="product-description">
+                                        Mật ong rừng U Minh được thu hoạch từ rừng ngập mặn U Minh, mang hương vị đặc trưng của thiên nhiên hoang dã.
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-origin">
+                                            <i class="fas fa-map-marker-alt"></i> Cà Mau
+                                        </div>
+                                        <div class="product-stock in-stock">
+                                            <i class="fas fa-check-circle"></i> Còn hàng
+                                        </div>
+                                    </div>
+                                    <div class="product-actions-bottom">
+                                        <button class="add-to-cart" data-product-id="1">
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                                        </button>
+                                        <button class="buy-now" data-product-id="1">
+                                            Mua ngay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                          <!-- Product 2 -->
+                        <div class="product-card" data-category="forest-honey" data-price="280000" data-rating="4" data-product-id="2">
+                            <div class="product-card-inner">
+                                <div class="product-img">
+                                    <a href="product-detail.html?id=2" class="product-link">
+                                        <img src="/assets/images/matong4.jpg" alt="Mật ong rừng Tràm">
+                                    </a>
+                                    <div class="product-actions">
+                                       
+                                        <button class="action-btn" aria-label="Yêu thích" data-action="wishlist" title="Thêm vào yêu thích">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="action-btn" aria-label="So sánh" data-action="compare" title="Thêm vào so sánh">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Mật ong rừng</div>
+                                    <h3 class="product-title">
+                                        <a href="product-detail.html?id=2">Mật ong rừng Tràm Đồng Tháp</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(18 đánh giá)</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">280,000₫</span>
+                                    </div>
+                                    <div class="product-description">
+                                        Mật ong rừng Tràm Đồng Tháp có hương thơm đặc trưng, vị ngọt dịu, chứa nhiều dưỡng chất từ rừng tràm.
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-origin">
+                                            <i class="fas fa-map-marker-alt"></i> Đồng Tháp
+                                        </div>
+                                        <div class="product-stock in-stock">
+                                            <i class="fas fa-check-circle"></i> Còn hàng
+                                        </div>
+                                    </div>
+                                    <div class="product-actions-bottom">
+                                        <button class="add-to-cart" data-product-id="2">
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                                        </button>
+                                        <button class="buy-now" data-product-id="2">
+                                            Mua ngay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                          <!-- Product 3 -->
+                        <div class="product-card" data-category="forest-honey" data-price="270000" data-rating="5" data-product-id="3">
+                            <div class="product-card-inner">
+                                <div class="product-img">
+                                    <a href="product-detail.html?id=3" class="product-link">
+                                        <img src="/assets/images/matong4.jpg" alt="Mật ong rừng Bạc Hà">
+                                    </a>
+                                    <span class="discount-badge">-10%</span>
+                                    <div class="product-actions">
+                                      
+                                        <button class="action-btn" aria-label="Yêu thích" data-action="wishlist" title="Thêm vào yêu thích">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="action-btn" aria-label="So sánh" data-action="compare" title="Thêm vào so sánh">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Mật ong rừng</div>
+                                    <h3 class="product-title">
+                                        <a href="product-detail.html?id=3">Mật ong rừng Bạc Hà Mộc Châu</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(31 đánh giá)</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">270,000₫</span>
+                                        <span class="old-price">300,000₫</span>
+                                    </div>
+                                    <div class="product-description">
+                                        Mật ong rừng Bạc Hà Mộc Châu mang hương thơm của hoa bạc hà, giúp sảng khoái và tốt cho hệ hô hấp.
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-origin">
+                                            <i class="fas fa-map-marker-alt"></i> Sơn La
+                                        </div>
+                                        <div class="product-stock in-stock">
+                                            <i class="fas fa-check-circle"></i> Còn hàng
+                                        </div>
+                                    </div>
+                                    <div class="product-actions-bottom">
+                                        <button class="add-to-cart" data-product-id="3">
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                                        </button>
+                                        <button class="buy-now" data-product-id="3">
+                                            Mua ngay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        <!-- Product 4 -->
+                        <div class="product-card" data-category="forest-honey" data-price="310000" data-rating="4" data-product-id="4">
+                            <div class="product-card-inner">
+                                <div class="product-img">
+                                    <a href="product-detail.html?id=4" class="product-link">
+                                        <img src="/assets/images/matong4.jpg" alt="Mật ong rừng hoa Nhãn">
+                                    </a>
+                                    <div class="product-actions">
+                                        
+                                        <button class="action-btn" aria-label="Yêu thích" data-action="wishlist" title="Thêm vào yêu thích">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="action-btn" aria-label="So sánh" data-action="compare" title="Thêm vào so sánh">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Mật ong rừng</div>
+                                    <h3 class="product-title">
+                                        <a href="product-detail.html?id=4">Mật ong rừng hoa Nhãn Hưng Yên</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(15 đánh giá)</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">310,000₫</span>
+                                    </div>
+                                    <div class="product-description">
+                                        Mật ong rừng hoa Nhãn Hưng Yên có vị ngọt thanh, đặc biệt giàu khoáng chất và vitamin, hỗ trợ sức khỏe tim mạch.
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-origin">
+                                            <i class="fas fa-map-marker-alt"></i> Hưng Yên
+                                        </div>
+                                        <div class="product-stock in-stock">
+                                            <i class="fas fa-check-circle"></i> Còn hàng
+                                        </div>
+                                    </div>
+                                    <div class="product-actions-bottom">
+                                        <button class="add-to-cart" data-product-id="4">
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                                        </button>
+                                        <button class="buy-now" data-product-id="4">
+                                            Mua ngay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 5 -->
+                        <div class="product-card" data-category="raw-honey" data-price="340000" data-rating="5" data-product-id="5">
+                            <div class="product-card-inner">
+                                <div class="product-img">
+                                    <a href="product-detail.html?id=5" class="product-link">
+                                        <img src="/assets/images/matong4.jpg" alt="Mật ong rừng nguyên tổ">
+                                    </a>
+                                    <span class="discount-badge">-8%</span>
+                                    <div class="product-actions">
+                                      
+                                        <button class="action-btn" aria-label="Yêu thích" data-action="wishlist" title="Thêm vào yêu thích">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="action-btn" aria-label="So sánh" data-action="compare" title="Thêm vào so sánh">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Mật ong nguyên tổ</div>
+                                    <h3 class="product-title">
+                                        <a href="product-detail.html?id=5">Mật ong rừng nguyên tổ Tây Bắc</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(20 đánh giá)</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">340,000₫</span>
+                                        <span class="old-price">370,000₫</span>
+                                    </div>
+                                    <div class="product-description">
+                                        Mật ong rừng nguyên tổ Tây Bắc, giữ trọn vẹn hương vị tinh túy và dưỡng chất từ thiên nhiên.
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-origin">
+                                            <i class="fas fa-map-marker-alt"></i> Tây Bắc
+                                        </div>
+                                        <div class="product-stock in-stock">
+                                            <i class="fas fa-check-circle"></i> Còn hàng
+                                        </div>
+                                    </div>
+                                    <div class="product-actions-bottom">
+                                        <button class="add-to-cart" data-product-id="5">
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                                        </button>
+                                        <button class="buy-now" data-product-id="5">
+                                            Mua ngay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 6 -->
+                        <div class="product-card" data-category="royal-jelly" data-price="450000" data-rating="5" data-product-id="6">
+                            <div class="product-card-inner">
+                                <div class="product-img">
+                                    <a href="product-detail.html?id=6" class="product-link">
+                                        <img src="/assets/images/matong4.jpg" alt="Sữa ong chúa tươi">
+                                    </a>
+                                    <div class="product-actions">
+                                       
+                                        <button class="action-btn" aria-label="Yêu thích" data-action="wishlist" title="Thêm vào yêu thích">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="action-btn" aria-label="So sánh" data-action="compare" title="Thêm vào so sánh">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Sữa ong chúa</div>
+                                    <h3 class="product-title">
+                                        <a href="product-detail.html?id=6">Sữa ong chúa tươi nguyên chất</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(35 đánh giá)</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">450,000₫</span>
+                                    </div>
+                                    <div class="product-description">
+                                        Sữa ong chúa tươi nguyên chất, "thần dược" cho sức khỏe và sắc đẹp, được thu hoạch và bảo quản nghiêm ngặt.
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-origin">
+                                            <i class="fas fa-map-marker-alt"></i> Bảo Lộc
+                                        </div>
+                                        <div class="product-stock in-stock">
+                                            <i class="fas fa-check-circle"></i> Còn hàng
+                                        </div>
+                                    </div>
+                                    <div class="product-actions-bottom">
+                                        <button class="add-to-cart" data-product-id="6">
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                                        </button>
+                                        <button class="buy-now" data-product-id="6">
+                                            Mua ngay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Product 7 -->
+                        <div class="product-card" data-category="forest-honey" data-price="290000" data-rating="4" data-product-id="7">
+                            <div class="product-card-inner">
+                                <div class="product-img">
+                                    <a href="product-detail.html?id=7" class="product-link">
+                                        <img src="/assets/images/matong4.jpg" alt="Mật ong rừng hoa Cà Phê">
+                                    </a>
+                                    <div class="product-actions">
+                                     
+                                        <button class="action-btn" aria-label="Yêu thích" data-action="wishlist" title="Thêm vào yêu thích">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="action-btn" aria-label="So sánh" data-action="compare" title="Thêm vào so sánh">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Mật ong rừng</div>
+                                    <h3 class="product-title">
+                                        <a href="product-detail.html?id=7">Mật ong hoa Cà Phê Đắk Lắk</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(22 đánh giá)</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">290,000₫</span>
+                                    </div>
+                                    <div class="product-description">
+                                        Mật ong hoa Cà Phê Đắk Lắk có màu hổ phách, vị ngọt đậm đà, hương thơm nồng nàn đặc trưng của hoa cà phê.
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-origin">
+                                            <i class="fas fa-map-marker-alt"></i> Đắk Lắk
+                                        </div>
+                                        <div class="product-stock in-stock">
+                                            <i class="fas fa-check-circle"></i> Còn hàng
+                                        </div>
+                                    </div>
+                                    <div class="product-actions-bottom">
+                                        <button class="add-to-cart" data-product-id="7">
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                                        </button>
+                                        <button class="buy-now" data-product-id="7">
+                                            Mua ngay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 8 -->
+                        <div class="product-card" data-category="forest-honey" data-price="264000" data-rating="4" data-product-id="8">
+                            <div class="product-card-inner">
+                                <div class="product-img">
+                                    <a href="product-detail.html?id=8" class="product-link">
+                                        <img src="/assets/images/matong4.jpg" alt="Mật ong rừng hoa Vải">
+                                    </a>
+                                    <span class="discount-badge">-12%</span>
+                                    <div class="product-actions">
+                                       
+                                        <button class="action-btn" aria-label="Yêu thích" data-action="wishlist" title="Thêm vào yêu thích">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="action-btn" aria-label="So sánh" data-action="compare" title="Thêm vào so sánh">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Mật ong rừng</div>
+                                    <h3 class="product-title">
+                                        <a href="product-detail.html?id=8">Mật ong hoa Vải Lục Ngạn</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(19 đánh giá)</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">264,000₫</span>
+                                        <span class="old-price">300,000₫</span>
+                                    </div>
+                                    <div class="product-description">
+                                        Mật ong hoa Vải Lục Ngạn có vị ngọt thanh, thơm dịu, màu vàng óng, đặc biệt tốt cho người già và trẻ em.
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-origin">
+                                            <i class="fas fa-map-marker-alt"></i> Bắc Giang
+                                        </div>
+                                        <div class="product-stock in-stock">
+                                            <i class="fas fa-check-circle"></i> Còn hàng
+                                        </div>
+                                    </div>
+                                    <div class="product-actions-bottom">
+                                        <button class="add-to-cart" data-product-id="8">
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                                        </button>
+                                        <button class="buy-now" data-product-id="8">
+                                            Mua ngay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 9 -->
+                        <div class="product-card" data-category="forest-honey" data-price="450000" data-rating="5" data-product-id="9">
+                            <div class="product-card-inner">
+                                <div class="product-img">
+                                    <a href="product-detail.html?id=9" class="product-link">
+                                        <img src="/assets/images/matong4.jpg" alt="Mật ong rừng Manuka">
+                                    </a>
+                                    <div class="product-actions">
+                                       
+                                        <button class="action-btn" aria-label="Yêu thích" data-action="wishlist" title="Thêm vào yêu thích">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="action-btn" aria-label="So sánh" data-action="compare" title="Thêm vào so sánh">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Mật ong rừng</div>
+                                    <h3 class="product-title">
+                                        <a href="product-detail.html?id=9">Mật ong Manuka New Zealand</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(40 đánh giá)</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">450,000₫</span>
+                                    </div>
+                                    <div class="product-description">
+                                        Mật ong Manuka New Zealand nổi tiếng thế giới với đặc tính kháng khuẩn vượt trội, hỗ trợ điều trị nhiều bệnh.
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-origin">
+                                            <i class="fas fa-map-marker-alt"></i> New Zealand
+                                        </div>
+                                        <div class="product-stock out-of-stock">
+                                            <i class="fas fa-times-circle"></i> Hết hàng
+                                        </div>
+                                    </div>
+                                    <div class="product-actions-bottom">
+                                        <button class="add-to-cart" data-product-id="9" disabled>
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                                        </button>
+                                        <button class="buy-now" data-product-id="9" disabled>
+                                            Mua ngay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 10 -->
+                        <div class="product-card" data-category="bee-pollen" data-price="180000" data-rating="4" data-product-id="10">
+                            <div class="product-card-inner">
+                                <div class="product-img">
+                                    <a href="product-detail.html?id=10" class="product-link">
+                                        <img src="/assets/images/matong4.jpg" alt="Phấn hoa Ong Rừng">
+                                    </a>
+                                    <div class="product-actions">
+                                        <button class="action-btn" aria-label="Yêu thích" data-action="wishlist" title="Thêm vào yêu thích">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="action-btn" aria-label="So sánh" data-action="compare" title="Thêm vào so sánh">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Phấn hoa</div>
+                                    <h3 class="product-title">
+                                        <a href="product-detail.html?id=10">Phấn hoa Ong Rừng Tự Nhiên</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(12 đánh giá)</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">180,000₫</span>
+                                    </div>
+                                    <div class="product-description">
+                                        Phấn hoa ong rừng, giàu protein và vitamin, bồi bổ sức khỏe và tăng cường đề kháng.
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-origin">
+                                            <i class="fas fa-map-marker-alt"></i> Gia Lai
+                                        </div>
+                                        <div class="product-stock in-stock">
+                                            <i class="fas fa-check-circle"></i> Còn hàng
+                                        </div>
+                                    </div>
+                                    <div class="product-actions-bottom">
+                                        <button class="add-to-cart" data-product-id="10">
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                                        </button>
+                                        <button class="buy-now" data-product-id="10">
+                                            Mua ngay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 11 -->
+                        <div class="product-card" data-category="beeswax" data-price="120000" data-rating="5" data-product-id="11">
+                            <div class="product-card-inner">
+                                <div class="product-img">
+                                    <a href="product-detail.html?id=11" class="product-link">
+                                        <img src="/assets/images/matong4.jpg" alt="Sáp ong Vàng Nguyên Chất">
+                                    </a>
+                                    <span class="discount-badge">-20%</span>
+                                    <div class="product-actions">
+                                        <button class="action-btn" aria-label="Yêu thích" data-action="wishlist" title="Thêm vào yêu thích">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="action-btn" aria-label="So sánh" data-action="compare" title="Thêm vào so sánh">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Sáp ong</div>
+                                    <h3 class="product-title">
+                                        <a href="product-detail.html?id=11">Sáp ong Vàng Nguyên Chất</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(18 đánh giá)</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">120,000₫</span>
+                                        <span class="old-price">150,000₫</span>
+                                    </div>
+                                    <div class="product-description">
+                                        Sáp ong vàng tự nhiên, tinh khiết, dùng làm nến, mỹ phẩm hoặc các ứng dụng dược liệu.
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-origin">
+                                            <i class="fas fa-map-marker-alt"></i> Lâm Đồng
+                                        </div>
+                                        <div class="product-stock in-stock">
+                                            <i class="fas fa-check-circle"></i> Còn hàng
+                                        </div>
+                                    </div>
+                                    <div class="product-actions-bottom">
+                                        <button class="add-to-cart" data-product-id="11">
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                                        </button>
+                                        <button class="buy-now" data-product-id="11">
+                                            Mua ngay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add more products here -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <a href="#" class="prev" aria-label="Trang trước">
+                            <i class="fas fa-chevron-left"></i> Trước
+                        </a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <span class="pagination-dots">...</span>
+                        <a href="#">5</a>
+                        <a href="#" class="next" aria-label="Trang sau">
+                            Sau <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>        </div>
+    </section>
+
+    <!-- Recently Viewed Section (Will be populated by JavaScript) -->
+    <div id="recently-viewed-section" class="recently-viewed-section" style="display: none;">
+        <!-- Content will be added via JavaScript -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/assets/images/logo.jpg" alt="Honey Bee Farm Logo">
+                    </div>
+                    <div class="company-info">
+                        <p>Tầng 6 tòa nhà Ladeco, 266 Đội Cấn, phường Liễu Giai, Hà Nội.</p>
+                        <p class="hotline-footer">1800 6750</p>
+                        <p>hellocalein@gmail.com</p>
+                        <p>Hệ thống chi nhánh</p>
+                    </div>
+                    <div class="social-media">
+                        <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Về chúng tôi</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Sản phẩm</a></li>
+                        <li><a href="#">Khuyến mãi</a></li>
+                        <li><a href="#">Chứng nhận chất lượng</a></li>
+                        <li><a href="#">Cảm nhận khách hàng</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Hỗ trợ khách hàng</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#">Chính sách thanh toán</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Điều khoản dịch vụ</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Phương thức thanh toán</h4>
+                    <div class="payment-methods">
+                        <img src="/assets/images/visa.jpg" alt="VISA">
+                
+                    </div>
+                    <h4 class="mt-3">Đăng ký nhận tin</h4>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Email của bạn" aria-label="Email đăng ký nhận tin">
+                        <button type="submit" aria-label="Đăng ký"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2025 Honey Bee Farm. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+        
+        <a href="#" id="back-to-top" class="back-to-top" aria-label="Về đầu trang">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </footer>
+
+    <!-- Enhanced Notification -->
+    <div id="notification" class="notification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="notification-message">Sản phẩm đã được thêm vào giỏ hàng</span>
+        </div>
+        <button id="notification-close" class="notification-close" aria-label="Đóng thông báo">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>    
+
+    <!-- Quick View Modal -->
+    <div class="quickview-modal" id="quickview-modal">
+        <div class="quickview-content">
+            <button class="quickview-close" id="quickview-close" aria-label="Đóng">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="quickview-body">
+                <div class="quickview-left">
+                    <div class="quickview-image-slider">
+                        <img id="quickview-main-image" src="" alt="Hình ảnh sản phẩm">
+                    </div>
+                    <div id="quickview-thumbnails-container">
+                        <!-- Thumbnails will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="quickview-right">
+                    <span class="quickview-category" id="quickview-category">Danh mục</span>
+                    <h2 class="quickview-title" id="quickview-title">Tên sản phẩm</h2>
+                    
+                    <div class="quickview-rating" id="quickview-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <span class="rating-count-quickview">(10 đánh giá)</span>
+                    </div>
+                    
+                    <div class="quickview-price" id="quickview-price">
+                        <span class="current-price">255,000₫</span>
+                        <span class="old-price" style="display: none;">300,000₫</span>
+                    </div>
+                    
+                    <p class="quickview-short-description" id="quickview-short-description">
+                        Mô tả ngắn gọn về sản phẩm sẽ được hiển thị tại đây.
+                    </p>
+                    
+                    <div class="quickview-availability" id="quickview-availability">
+                        <span class="in-stock">Còn hàng</span>
+                    </div>
+                    
+                    <div class="quickview-actions">
+                        <div class="quantity-selector">
+                            <button class="quantity-btn" id="quickview-qty-minus" aria-label="Giảm số lượng">-</button>
+                            <input type="number" id="quickview-quantity-input" value="1" min="1" max="10">
+                            <button class="quantity-btn" id="quickview-qty-plus" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        
+                        <button class="quickview-add-to-cart-btn" id="quickview-add-to-cart">
+                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                        </button>
+                    </div>
+                    
+                    <div class="quickview-meta-details">
+                        <p><strong>Mã sản phẩm:</strong> <span id="quickview-sku">SP001</span></p>
+                        <p><strong>Danh mục:</strong> <a href="#" id="quickview-category-link">Mật ong rừng</a></p>
+                        <p><strong>Xuất xứ:</strong> <span id="quickview-origin">Việt Nam</span></p>
+                        <p><strong>Thương hiệu:</strong> <span id="quickview-brand">Honey Bee Farm</span></p>
+                    </div>
+                    
+                    <a href="#" class="quickview-full-details-link" id="quickview-full-details">
+                        <i class="fas fa-eye"></i> Xem chi tiết đầy đủ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/shop.js"></script>
+    <script src="js/product-detail-handler.js"></script>
+</body>
+</html>

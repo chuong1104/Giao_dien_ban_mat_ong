@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng - Honey Bee Farm</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="description" content="Xem lại giỏ hàng và tiến hành thanh toán tại Honey Bee Farm.">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="main-nav">
+                <div class="mobile-menu-toggle">
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Trang chủ</a></li>
+                    <li class="nav-item"><a href="shop.html" class="nav-link">Sản phẩm</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">Tin tức</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Liên hệ</a></li>
+                </ul>
+                
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="/assets/images/logo.jpg" alt="Honey Bee Farm Logo">
+                    </a>
+                </div>
+
+                <div class="right-nav">
+                    <a href="tel:18006750" class="hotline">
+                        <i class="fas fa-phone-alt"></i>
+                        <span class="phone">1800 6750</span>
+                    </a>
+                    <a href="#" class="user-account" aria-label="Tài khoản">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="#" class="search" aria-label="Tìm kiếm">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    <a href="cart.html" class="cart active" aria-label="Giỏ hàng">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner cart-banner">
+        <div class="container">
+            <div class="banner-content">
+                <h1>Giỏ Hàng Của Bạn</h1>
+                <p class="banner-subtitle">Kiểm tra sản phẩm và tiến hành thanh toán</p>
+                <div class="breadcrumb">
+                    <a href="index.html">Trang chủ</a>
+                    <span class="separator"><i class="fas fa-chevron-right"></i></span>
+                    <span class="current">Giỏ hàng</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="container">
+            <div class="cart-container">
+                <div class="cart-items-area">
+                    <h2 class="cart-area-title">Sản phẩm trong giỏ</h2>
+                    <div class="cart-table-container">
+                        <table class="cart-table">
+                            <thead>
+                                <tr>
+                                    <th class="product-thumbnail-header">&nbsp;</th>
+                                    <th class="product-name-header">Sản phẩm</th>
+                                    <th class="product-price-header">Giá</th>
+                                    <th class="product-quantity-header">Số lượng</th>
+                                    <th class="product-subtotal-header">Tạm tính</th>
+                                    <th class="product-remove-header">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cart-items-body">
+                                <!-- Cart items will be populated by JavaScript -->
+                                <!-- Example item:
+                                <tr class="cart-item" data-product-id="1">
+                                    <td class="product-thumbnail">
+                                        <a href="product-detail.html?id=1">
+                                            <img src="/placeholder.svg?height=80&width=80&text=Product" alt="Tên sản phẩm">
+                                        </a>
+                                    </td>
+                                    <td class="product-name">
+                                        <a href="product-detail.html?id=1">Mật ong rừng U Minh</a>
+                                        <p class="item-meta">Dung tích: 500ml</p>
+                                    </td>
+                                    <td class="product-price" data-price="255000">255,000₫</td>
+                                    <td class="product-quantity">
+                                        <div class="quantity-selector">
+                                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                                            <input type="number" value="1" min="1" max="10" aria-label="Số lượng sản phẩm">
+                                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="product-subtotal">255,000₫</td>
+                                    <td class="product-remove">
+                                        <button class="remove-item-btn" aria-label="Xóa sản phẩm">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="cart-empty-message" id="cart-empty-message" style="display: none;">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Giỏ hàng của bạn đang trống.</p>
+                        <a href="shop.html" class="btn btn-primary">Tiếp tục mua sắm</a>
+                    </div>
+                </div>
+
+                <div class="cart-summary-area">
+                    <h2 class="cart-area-title">Tổng cộng giỏ hàng</h2>
+                    <div class="cart-summary-content">
+                        <div class="summary-row">
+                            <span>Tạm tính:</span>
+                            <span id="cart-subtotal">0₫</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Giao hàng:</span>
+                            <span id="shipping-cost">Miễn phí</span>
+                            <!-- Or implement shipping calculation -->
+                        </div>
+                        <div class="coupon-area">
+                            <label for="coupon-code">Mã giảm giá:</label>
+                            <div class="coupon-input-group">
+                                <input type="text" id="coupon-code" placeholder="Nhập mã giảm giá">
+                                <button id="apply-coupon-btn" class="btn btn-secondary">Áp dụng</button>
+                            </div>
+                            <p id="coupon-status" class="coupon-status"></p>
+                        </div>
+                        <div class="summary-row total-row">
+                            <span>Tổng cộng:</span>
+                            <strong id="cart-total">0₫</strong>
+                        </div>
+                        <button id="proceed-to-checkout-btn" class="btn btn-primary btn-block">
+                            Tiến hành thanh toán
+                        </button>
+                        <a href="shop.html" class="continue-shopping-link">
+                            <i class="fas fa-arrow-left"></i> Tiếp tục mua sắm
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/assets/images/logo.jpg" alt="Honey Bee Farm Logo">
+                    </div>
+                    <div class="company-info">
+                        <p>Tầng 6 tòa nhà Ladeco, 266 Đội Cấn, phường Liễu Giai, Hà Nội.</p>
+                        <p class="hotline-footer">1800 6750</p>
+                        <p>hellocalein@gmail.com</p>
+                        <p>Hệ thống chi nhánh</p>
+                    </div>
+                    <div class="social-media">
+                        <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Về chúng tôi</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="shop.html">Sản phẩm</a></li>
+                        <li><a href="#">Khuyến mãi</a></li>
+                        <li><a href="#">Chứng nhận chất lượng</a></li>
+                        <li><a href="#">Cảm nhận khách hàng</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Hỗ trợ khách hàng</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#">Chính sách thanh toán</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Điều khoản dịch vụ</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Phương thức thanh toán</h4>
+                    <div class="payment-methods">
+                        <img src="/placeholder.svg?height=30&width=45&text=VISA" alt="VISA">
+                        <img src="/placeholder.svg?height=30&width=45&text=MC" alt="MasterCard">
+                        <img src="/placeholder.svg?height=30&width=45&text=Momo" alt="Momo">
+                        <img src="/placeholder.svg?height=30&width=45&text=Bank" alt="Banking">
+                    </div>
+                    <h4 class="mt-3">Đăng ký nhận tin</h4>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Email của bạn" aria-label="Email đăng ký nhận tin">
+                        <button type="submit" aria-label="Đăng ký"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2025 Honey Bee Farm. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+        
+        <a href="#" id="back-to-top" class="back-to-top" aria-label="Về đầu trang">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/cart-handler.js"></script>
+</body>
+</html>
